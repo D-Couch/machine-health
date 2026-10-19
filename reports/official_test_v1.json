@@ -1,0 +1,1007 @@
+{
+  "evaluation_id": "fd001_official_test_v1",
+  "protocol": "docs/EVALUATION_PROTOCOL.md v1",
+  "dataset": "NASA C-MAPSS FD001 official test; endpoint labels",
+  "evaluated_utc": "2026-10-19T09:41:21.571302+00:00",
+  "code_revision": "a2223a56e248aad49913b6dcf6041efd7244ea3a",
+  "n_engines": 100,
+  "target": "raw uncapped RUL in cycles",
+  "primary_aggregation": "one endpoint per engine, equally weighted",
+  "primary_model": {
+    "name": "histogram gradient boosting",
+    "mae_cycles": 20.92166451299603,
+    "rmse_cycles": 29.316056690993683,
+    "engine_bootstrap_95_ci": {
+      "mae_cycles": {
+        "lower_95": 16.854541751654978,
+        "upper_95": 25.01460421353618
+      },
+      "rmse_cycles": {
+        "lower_95": 24.313756733765306,
+        "upper_95": 33.903306647324094
+      }
+    }
+  },
+  "constant_baseline": {
+    "name": "training-group mean constant",
+    "mae_cycles": 42.229927591687755,
+    "rmse_cycles": 54.59720516586751,
+    "engine_bootstrap_95_ci": {
+      "mae_cycles": {
+        "lower_95": 35.51535034143757,
+        "upper_95": 49.05320626066991
+      },
+      "rmse_cycles": {
+        "lower_95": 47.8003445329946,
+        "upper_95": 60.83447972912635
+      }
+    }
+  },
+  "by_actual_rul_band": {
+    "0-19": {
+      "n_engines": 13,
+      "hist_gradient_boosting": {
+        "mae_cycles": 6.710926392108169,
+        "rmse_cycles": 13.05098092554579
+      },
+      "constant_baseline": {
+        "mae_cycles": 99.1624228482414,
+        "rmse_cycles": 99.24163481858203
+      }
+    },
+    "20-49": {
+      "n_engines": 17,
+      "hist_gradient_boosting": {
+        "mae_cycles": 8.28008490011689,
+        "rmse_cycles": 12.79204358499249
+      },
+      "constant_baseline": {
+        "mae_cycles": 81.87283008806041,
+        "rmse_cycles": 82.33956464084764
+      }
+    },
+    "50-99": {
+      "n_engines": 36,
+      "hist_gradient_boosting": {
+        "mae_cycles": 23.79924288053793,
+        "rmse_cycles": 32.57819495098696
+      },
+      "constant_baseline": {
+        "mae_cycles": 32.43165361747218,
+        "rmse_cycles": 36.28446163805791
+      }
+    },
+    "100+": {
+      "n_engines": 34,
+      "hist_gradient_boosting": {
+        "mae_cycles": 29.629124152966007,
+        "rmse_cycles": 35.45454334966059
+      },
+      "constant_baseline": {
+        "mae_cycles": 11.01481236516506,
+        "rmse_cycles": 14.749725934736118
+      }
+    }
+  },
+  "endpoint_per_engine": [
+    {
+      "engine_id": "test:FD001:1",
+      "unit": 1,
+      "last_observed_cycle": 31,
+      "actual_rul_cycles": 112,
+      "predicted_rul_cycles": 166.57240942380085,
+      "signed_error_cycles": 54.57240942380085,
+      "absolute_error_cycles": 54.57240942380085
+    },
+    {
+      "engine_id": "test:FD001:2",
+      "unit": 2,
+      "last_observed_cycle": 49,
+      "actual_rul_cycles": 98,
+      "predicted_rul_cycles": 163.86603430216573,
+      "signed_error_cycles": 65.86603430216573,
+      "absolute_error_cycles": 65.86603430216573
+    },
+    {
+      "engine_id": "test:FD001:3",
+      "unit": 3,
+      "last_observed_cycle": 126,
+      "actual_rul_cycles": 69,
+      "predicted_rul_cycles": 54.63148109226073,
+      "signed_error_cycles": -14.368518907739272,
+      "absolute_error_cycles": 14.368518907739272
+    },
+    {
+      "engine_id": "test:FD001:4",
+      "unit": 4,
+      "last_observed_cycle": 106,
+      "actual_rul_cycles": 82,
+      "predicted_rul_cycles": 78.93863486328388,
+      "signed_error_cycles": -3.0613651367161197,
+      "absolute_error_cycles": 3.0613651367161197
+    },
+    {
+      "engine_id": "test:FD001:5",
+      "unit": 5,
+      "last_observed_cycle": 98,
+      "actual_rul_cycles": 91,
+      "predicted_rul_cycles": 104.53274314757479,
+      "signed_error_cycles": 13.532743147574791,
+      "absolute_error_cycles": 13.532743147574791
+    },
+    {
+      "engine_id": "test:FD001:6",
+      "unit": 6,
+      "last_observed_cycle": 105,
+      "actual_rul_cycles": 93,
+      "predicted_rul_cycles": 121.11216010147749,
+      "signed_error_cycles": 28.112160101477485,
+      "absolute_error_cycles": 28.112160101477485
+    },
+    {
+      "engine_id": "test:FD001:7",
+      "unit": 7,
+      "last_observed_cycle": 160,
+      "actual_rul_cycles": 91,
+      "predicted_rul_cycles": 102.57379999112393,
+      "signed_error_cycles": 11.573799991123934,
+      "absolute_error_cycles": 11.573799991123934
+    },
+    {
+      "engine_id": "test:FD001:8",
+      "unit": 8,
+      "last_observed_cycle": 166,
+      "actual_rul_cycles": 95,
+      "predicted_rul_cycles": 79.86610553463316,
+      "signed_error_cycles": -15.133894465366836,
+      "absolute_error_cycles": 15.133894465366836
+    },
+    {
+      "engine_id": "test:FD001:9",
+      "unit": 9,
+      "last_observed_cycle": 55,
+      "actual_rul_cycles": 111,
+      "predicted_rul_cycles": 150.6899741452862,
+      "signed_error_cycles": 39.689974145286186,
+      "absolute_error_cycles": 39.689974145286186
+    },
+    {
+      "engine_id": "test:FD001:10",
+      "unit": 10,
+      "last_observed_cycle": 192,
+      "actual_rul_cycles": 96,
+      "predicted_rul_cycles": 87.01569266700965,
+      "signed_error_cycles": -8.984307332990355,
+      "absolute_error_cycles": 8.984307332990355
+    },
+    {
+      "engine_id": "test:FD001:11",
+      "unit": 11,
+      "last_observed_cycle": 83,
+      "actual_rul_cycles": 97,
+      "predicted_rul_cycles": 110.66028465637774,
+      "signed_error_cycles": 13.66028465637774,
+      "absolute_error_cycles": 13.66028465637774
+    },
+    {
+      "engine_id": "test:FD001:12",
+      "unit": 12,
+      "last_observed_cycle": 217,
+      "actual_rul_cycles": 124,
+      "predicted_rul_cycles": 119.06738012162472,
+      "signed_error_cycles": -4.932619878375277,
+      "absolute_error_cycles": 4.932619878375277
+    },
+    {
+      "engine_id": "test:FD001:13",
+      "unit": 13,
+      "last_observed_cycle": 195,
+      "actual_rul_cycles": 95,
+      "predicted_rul_cycles": 122.47108773976205,
+      "signed_error_cycles": 27.471087739762055,
+      "absolute_error_cycles": 27.471087739762055
+    },
+    {
+      "engine_id": "test:FD001:14",
+      "unit": 14,
+      "last_observed_cycle": 46,
+      "actual_rul_cycles": 107,
+      "predicted_rul_cycles": 139.86224782300735,
+      "signed_error_cycles": 32.86224782300735,
+      "absolute_error_cycles": 32.86224782300735
+    },
+    {
+      "engine_id": "test:FD001:15",
+      "unit": 15,
+      "last_observed_cycle": 76,
+      "actual_rul_cycles": 83,
+      "predicted_rul_cycles": 167.61895354652737,
+      "signed_error_cycles": 84.61895354652737,
+      "absolute_error_cycles": 84.61895354652737
+    },
+    {
+      "engine_id": "test:FD001:16",
+      "unit": 16,
+      "last_observed_cycle": 113,
+      "actual_rul_cycles": 84,
+      "predicted_rul_cycles": 122.20931070375927,
+      "signed_error_cycles": 38.20931070375927,
+      "absolute_error_cycles": 38.20931070375927
+    },
+    {
+      "engine_id": "test:FD001:17",
+      "unit": 17,
+      "last_observed_cycle": 165,
+      "actual_rul_cycles": 50,
+      "predicted_rul_cycles": 42.911544574690886,
+      "signed_error_cycles": -7.088455425309114,
+      "absolute_error_cycles": 7.088455425309114
+    },
+    {
+      "engine_id": "test:FD001:18",
+      "unit": 18,
+      "last_observed_cycle": 133,
+      "actual_rul_cycles": 28,
+      "predicted_rul_cycles": 43.18987047899382,
+      "signed_error_cycles": 15.189870478993818,
+      "absolute_error_cycles": 15.189870478993818
+    },
+    {
+      "engine_id": "test:FD001:19",
+      "unit": 19,
+      "last_observed_cycle": 135,
+      "actual_rul_cycles": 87,
+      "predicted_rul_cycles": 93.02776354106919,
+      "signed_error_cycles": 6.027763541069191,
+      "absolute_error_cycles": 6.027763541069191
+    },
+    {
+      "engine_id": "test:FD001:20",
+      "unit": 20,
+      "last_observed_cycle": 184,
+      "actual_rul_cycles": 16,
+      "predicted_rul_cycles": 1.2808621496608323,
+      "signed_error_cycles": -14.719137850339168,
+      "absolute_error_cycles": 14.719137850339168
+    },
+    {
+      "engine_id": "test:FD001:21",
+      "unit": 21,
+      "last_observed_cycle": 148,
+      "actual_rul_cycles": 57,
+      "predicted_rul_cycles": 64.12585869120572,
+      "signed_error_cycles": 7.125858691205721,
+      "absolute_error_cycles": 7.125858691205721
+    },
+    {
+      "engine_id": "test:FD001:22",
+      "unit": 22,
+      "last_observed_cycle": 39,
+      "actual_rul_cycles": 111,
+      "predicted_rul_cycles": 143.73783825206274,
+      "signed_error_cycles": 32.737838252062744,
+      "absolute_error_cycles": 32.737838252062744
+    },
+    {
+      "engine_id": "test:FD001:23",
+      "unit": 23,
+      "last_observed_cycle": 130,
+      "actual_rul_cycles": 113,
+      "predicted_rul_cycles": 166.2353928871246,
+      "signed_error_cycles": 53.23539288712459,
+      "absolute_error_cycles": 53.23539288712459
+    },
+    {
+      "engine_id": "test:FD001:24",
+      "unit": 24,
+      "last_observed_cycle": 186,
+      "actual_rul_cycles": 20,
+      "predicted_rul_cycles": 23.110346431387516,
+      "signed_error_cycles": 3.1103464313875158,
+      "absolute_error_cycles": 3.1103464313875158
+    },
+    {
+      "engine_id": "test:FD001:25",
+      "unit": 25,
+      "last_observed_cycle": 48,
+      "actual_rul_cycles": 145,
+      "predicted_rul_cycles": 183.4039507451283,
+      "signed_error_cycles": 38.4039507451283,
+      "absolute_error_cycles": 38.4039507451283
+    },
+    {
+      "engine_id": "test:FD001:26",
+      "unit": 26,
+      "last_observed_cycle": 76,
+      "actual_rul_cycles": 119,
+      "predicted_rul_cycles": 110.68130743165985,
+      "signed_error_cycles": -8.318692568340154,
+      "absolute_error_cycles": 8.318692568340154
+    },
+    {
+      "engine_id": "test:FD001:27",
+      "unit": 27,
+      "last_observed_cycle": 140,
+      "actual_rul_cycles": 66,
+      "predicted_rul_cycles": 107.50790297323779,
+      "signed_error_cycles": 41.50790297323779,
+      "absolute_error_cycles": 41.50790297323779
+    },
+    {
+      "engine_id": "test:FD001:28",
+      "unit": 28,
+      "last_observed_cycle": 158,
+      "actual_rul_cycles": 97,
+      "predicted_rul_cycles": 96.40843517633688,
+      "signed_error_cycles": -0.5915648236631199,
+      "absolute_error_cycles": 0.5915648236631199
+    },
+    {
+      "engine_id": "test:FD001:29",
+      "unit": 29,
+      "last_observed_cycle": 171,
+      "actual_rul_cycles": 90,
+      "predicted_rul_cycles": 94.87311337953442,
+      "signed_error_cycles": 4.873113379534416,
+      "absolute_error_cycles": 4.873113379534416
+    },
+    {
+      "engine_id": "test:FD001:30",
+      "unit": 30,
+      "last_observed_cycle": 143,
+      "actual_rul_cycles": 115,
+      "predicted_rul_cycles": 88.24295385893323,
+      "signed_error_cycles": -26.757046141066766,
+      "absolute_error_cycles": 26.757046141066766
+    },
+    {
+      "engine_id": "test:FD001:31",
+      "unit": 31,
+      "last_observed_cycle": 196,
+      "actual_rul_cycles": 8,
+      "predicted_rul_cycles": 14.695555643431335,
+      "signed_error_cycles": 6.6955556434313355,
+      "absolute_error_cycles": 6.6955556434313355
+    },
+    {
+      "engine_id": "test:FD001:32",
+      "unit": 32,
+      "last_observed_cycle": 145,
+      "actual_rul_cycles": 48,
+      "predicted_rul_cycles": 48.35993861965131,
+      "signed_error_cycles": 0.35993861965130947,
+      "absolute_error_cycles": 0.35993861965130947
+    },
+    {
+      "engine_id": "test:FD001:33",
+      "unit": 33,
+      "last_observed_cycle": 50,
+      "actual_rul_cycles": 106,
+      "predicted_rul_cycles": 162.07478786841637,
+      "signed_error_cycles": 56.074787868416365,
+      "absolute_error_cycles": 56.074787868416365
+    },
+    {
+      "engine_id": "test:FD001:34",
+      "unit": 34,
+      "last_observed_cycle": 203,
+      "actual_rul_cycles": 7,
+      "predicted_rul_cycles": 5.162827789834392,
+      "signed_error_cycles": -1.8371722101656083,
+      "absolute_error_cycles": 1.8371722101656083
+    },
+    {
+      "engine_id": "test:FD001:35",
+      "unit": 35,
+      "last_observed_cycle": 198,
+      "actual_rul_cycles": 11,
+      "predicted_rul_cycles": 12.100775327882518,
+      "signed_error_cycles": 1.100775327882518,
+      "absolute_error_cycles": 1.100775327882518
+    },
+    {
+      "engine_id": "test:FD001:36",
+      "unit": 36,
+      "last_observed_cycle": 126,
+      "actual_rul_cycles": 19,
+      "predicted_rul_cycles": 19.66809251236787,
+      "signed_error_cycles": 0.6680925123678705,
+      "absolute_error_cycles": 0.6680925123678705
+    },
+    {
+      "engine_id": "test:FD001:37",
+      "unit": 37,
+      "last_observed_cycle": 121,
+      "actual_rul_cycles": 21,
+      "predicted_rul_cycles": 52.19377005800662,
+      "signed_error_cycles": 31.19377005800662,
+      "absolute_error_cycles": 31.19377005800662
+    },
+    {
+      "engine_id": "test:FD001:38",
+      "unit": 38,
+      "last_observed_cycle": 125,
+      "actual_rul_cycles": 50,
+      "predicted_rul_cycles": 44.53368653265406,
+      "signed_error_cycles": -5.466313467345941,
+      "absolute_error_cycles": 5.466313467345941
+    },
+    {
+      "engine_id": "test:FD001:39",
+      "unit": 39,
+      "last_observed_cycle": 37,
+      "actual_rul_cycles": 142,
+      "predicted_rul_cycles": 165.38060092236563,
+      "signed_error_cycles": 23.38060092236563,
+      "absolute_error_cycles": 23.38060092236563
+    },
+    {
+      "engine_id": "test:FD001:40",
+      "unit": 40,
+      "last_observed_cycle": 133,
+      "actual_rul_cycles": 28,
+      "predicted_rul_cycles": 30.309017107019738,
+      "signed_error_cycles": 2.309017107019738,
+      "absolute_error_cycles": 2.309017107019738
+    },
+    {
+      "engine_id": "test:FD001:41",
+      "unit": 41,
+      "last_observed_cycle": 123,
+      "actual_rul_cycles": 18,
+      "predicted_rul_cycles": 61.33386136658703,
+      "signed_error_cycles": 43.33386136658703,
+      "absolute_error_cycles": 43.33386136658703
+    },
+    {
+      "engine_id": "test:FD001:42",
+      "unit": 42,
+      "last_observed_cycle": 156,
+      "actual_rul_cycles": 10,
+      "predicted_rul_cycles": 14.141839256624976,
+      "signed_error_cycles": 4.141839256624976,
+      "absolute_error_cycles": 4.141839256624976
+    },
+    {
+      "engine_id": "test:FD001:43",
+      "unit": 43,
+      "last_observed_cycle": 172,
+      "actual_rul_cycles": 59,
+      "predicted_rul_cycles": 86.06160931751842,
+      "signed_error_cycles": 27.061609317518418,
+      "absolute_error_cycles": 27.061609317518418
+    },
+    {
+      "engine_id": "test:FD001:44",
+      "unit": 44,
+      "last_observed_cycle": 54,
+      "actual_rul_cycles": 109,
+      "predicted_rul_cycles": 143.24228478795806,
+      "signed_error_cycles": 34.242284787958056,
+      "absolute_error_cycles": 34.242284787958056
+    },
+    {
+      "engine_id": "test:FD001:45",
+      "unit": 45,
+      "last_observed_cycle": 152,
+      "actual_rul_cycles": 114,
+      "predicted_rul_cycles": 57.95293333835904,
+      "signed_error_cycles": -56.04706666164096,
+      "absolute_error_cycles": 56.04706666164096
+    },
+    {
+      "engine_id": "test:FD001:46",
+      "unit": 46,
+      "last_observed_cycle": 146,
+      "actual_rul_cycles": 47,
+      "predicted_rul_cycles": 48.00620447574917,
+      "signed_error_cycles": 1.006204475749172,
+      "absolute_error_cycles": 1.006204475749172
+    },
+    {
+      "engine_id": "test:FD001:47",
+      "unit": 47,
+      "last_observed_cycle": 73,
+      "actual_rul_cycles": 135,
+      "predicted_rul_cycles": 123.42203452567509,
+      "signed_error_cycles": -11.577965474324913,
+      "absolute_error_cycles": 11.577965474324913
+    },
+    {
+      "engine_id": "test:FD001:48",
+      "unit": 48,
+      "last_observed_cycle": 78,
+      "actual_rul_cycles": 92,
+      "predicted_rul_cycles": 129.86867377180968,
+      "signed_error_cycles": 37.86867377180968,
+      "absolute_error_cycles": 37.86867377180968
+    },
+    {
+      "engine_id": "test:FD001:49",
+      "unit": 49,
+      "last_observed_cycle": 303,
+      "actual_rul_cycles": 21,
+      "predicted_rul_cycles": 20.044212785873896,
+      "signed_error_cycles": -0.9557872141261043,
+      "absolute_error_cycles": 0.9557872141261043
+    },
+    {
+      "engine_id": "test:FD001:50",
+      "unit": 50,
+      "last_observed_cycle": 74,
+      "actual_rul_cycles": 79,
+      "predicted_rul_cycles": 140.12892330155964,
+      "signed_error_cycles": 61.12892330155964,
+      "absolute_error_cycles": 61.12892330155964
+    },
+    {
+      "engine_id": "test:FD001:51",
+      "unit": 51,
+      "last_observed_cycle": 144,
+      "actual_rul_cycles": 114,
+      "predicted_rul_cycles": 82.29377238468075,
+      "signed_error_cycles": -31.70622761531925,
+      "absolute_error_cycles": 31.70622761531925
+    },
+    {
+      "engine_id": "test:FD001:52",
+      "unit": 52,
+      "last_observed_cycle": 189,
+      "actual_rul_cycles": 29,
+      "predicted_rul_cycles": 34.58648406389662,
+      "signed_error_cycles": 5.58648406389662,
+      "absolute_error_cycles": 5.58648406389662
+    },
+    {
+      "engine_id": "test:FD001:53",
+      "unit": 53,
+      "last_observed_cycle": 164,
+      "actual_rul_cycles": 26,
+      "predicted_rul_cycles": 31.85531685358072,
+      "signed_error_cycles": 5.855316853580721,
+      "absolute_error_cycles": 5.855316853580721
+    },
+    {
+      "engine_id": "test:FD001:54",
+      "unit": 54,
+      "last_observed_cycle": 121,
+      "actual_rul_cycles": 97,
+      "predicted_rul_cycles": 132.05622806080146,
+      "signed_error_cycles": 35.05622806080146,
+      "absolute_error_cycles": 35.05622806080146
+    },
+    {
+      "engine_id": "test:FD001:55",
+      "unit": 55,
+      "last_observed_cycle": 113,
+      "actual_rul_cycles": 137,
+      "predicted_rul_cycles": 137.97220525507223,
+      "signed_error_cycles": 0.9722052550722253,
+      "absolute_error_cycles": 0.9722052550722253
+    },
+    {
+      "engine_id": "test:FD001:56",
+      "unit": 56,
+      "last_observed_cycle": 136,
+      "actual_rul_cycles": 15,
+      "predicted_rul_cycles": 14.882697159472361,
+      "signed_error_cycles": -0.11730284052763906,
+      "absolute_error_cycles": 0.11730284052763906
+    },
+    {
+      "engine_id": "test:FD001:57",
+      "unit": 57,
+      "last_observed_cycle": 160,
+      "actual_rul_cycles": 103,
+      "predicted_rul_cycles": 98.64711676981723,
+      "signed_error_cycles": -4.352883230182769,
+      "absolute_error_cycles": 4.352883230182769
+    },
+    {
+      "engine_id": "test:FD001:58",
+      "unit": 58,
+      "last_observed_cycle": 176,
+      "actual_rul_cycles": 37,
+      "predicted_rul_cycles": 40.20456960547869,
+      "signed_error_cycles": 3.2045696054786887,
+      "absolute_error_cycles": 3.2045696054786887
+    },
+    {
+      "engine_id": "test:FD001:59",
+      "unit": 59,
+      "last_observed_cycle": 94,
+      "actual_rul_cycles": 114,
+      "predicted_rul_cycles": 112.86312151619853,
+      "signed_error_cycles": -1.1368784838014676,
+      "absolute_error_cycles": 1.1368784838014676
+    },
+    {
+      "engine_id": "test:FD001:60",
+      "unit": 60,
+      "last_observed_cycle": 147,
+      "actual_rul_cycles": 100,
+      "predicted_rul_cycles": 100.07176010523759,
+      "signed_error_cycles": 0.07176010523758691,
+      "absolute_error_cycles": 0.07176010523758691
+    },
+    {
+      "engine_id": "test:FD001:61",
+      "unit": 61,
+      "last_observed_cycle": 159,
+      "actual_rul_cycles": 21,
+      "predicted_rul_cycles": 33.470694532633374,
+      "signed_error_cycles": 12.470694532633374,
+      "absolute_error_cycles": 12.470694532633374
+    },
+    {
+      "engine_id": "test:FD001:62",
+      "unit": 62,
+      "last_observed_cycle": 232,
+      "actual_rul_cycles": 54,
+      "predicted_rul_cycles": 48.81694061243562,
+      "signed_error_cycles": -5.183059387564377,
+      "absolute_error_cycles": 5.183059387564377
+    },
+    {
+      "engine_id": "test:FD001:63",
+      "unit": 63,
+      "last_observed_cycle": 155,
+      "actual_rul_cycles": 72,
+      "predicted_rul_cycles": 76.07984720497676,
+      "signed_error_cycles": 4.079847204976758,
+      "absolute_error_cycles": 4.079847204976758
+    },
+    {
+      "engine_id": "test:FD001:64",
+      "unit": 64,
+      "last_observed_cycle": 168,
+      "actual_rul_cycles": 28,
+      "predicted_rul_cycles": 42.59505631187662,
+      "signed_error_cycles": 14.595056311876618,
+      "absolute_error_cycles": 14.595056311876618
+    },
+    {
+      "engine_id": "test:FD001:65",
+      "unit": 65,
+      "last_observed_cycle": 71,
+      "actual_rul_cycles": 128,
+      "predicted_rul_cycles": 153.15605934326982,
+      "signed_error_cycles": 25.156059343269817,
+      "absolute_error_cycles": 25.156059343269817
+    },
+    {
+      "engine_id": "test:FD001:66",
+      "unit": 66,
+      "last_observed_cycle": 147,
+      "actual_rul_cycles": 14,
+      "predicted_rul_cycles": 17.025247419994844,
+      "signed_error_cycles": 3.0252474199948445,
+      "absolute_error_cycles": 3.0252474199948445
+    },
+    {
+      "engine_id": "test:FD001:67",
+      "unit": 67,
+      "last_observed_cycle": 71,
+      "actual_rul_cycles": 77,
+      "predicted_rul_cycles": 156.86627028911713,
+      "signed_error_cycles": 79.86627028911713,
+      "absolute_error_cycles": 79.86627028911713
+    },
+    {
+      "engine_id": "test:FD001:68",
+      "unit": 68,
+      "last_observed_cycle": 187,
+      "actual_rul_cycles": 8,
+      "predicted_rul_cycles": 9.687803177862838,
+      "signed_error_cycles": 1.687803177862838,
+      "absolute_error_cycles": 1.687803177862838
+    },
+    {
+      "engine_id": "test:FD001:69",
+      "unit": 69,
+      "last_observed_cycle": 54,
+      "actual_rul_cycles": 121,
+      "predicted_rul_cycles": 147.37459222134154,
+      "signed_error_cycles": 26.374592221341544,
+      "absolute_error_cycles": 26.374592221341544
+    },
+    {
+      "engine_id": "test:FD001:70",
+      "unit": 70,
+      "last_observed_cycle": 152,
+      "actual_rul_cycles": 94,
+      "predicted_rul_cycles": 104.22814648871056,
+      "signed_error_cycles": 10.228146488710564,
+      "absolute_error_cycles": 10.228146488710564
+    },
+    {
+      "engine_id": "test:FD001:71",
+      "unit": 71,
+      "last_observed_cycle": 68,
+      "actual_rul_cycles": 118,
+      "predicted_rul_cycles": 121.14640290050083,
+      "signed_error_cycles": 3.1464029005008314,
+      "absolute_error_cycles": 3.1464029005008314
+    },
+    {
+      "engine_id": "test:FD001:72",
+      "unit": 72,
+      "last_observed_cycle": 131,
+      "actual_rul_cycles": 50,
+      "predicted_rul_cycles": 101.42395196317882,
+      "signed_error_cycles": 51.42395196317882,
+      "absolute_error_cycles": 51.42395196317882
+    },
+    {
+      "engine_id": "test:FD001:73",
+      "unit": 73,
+      "last_observed_cycle": 112,
+      "actual_rul_cycles": 131,
+      "predicted_rul_cycles": 146.81220381574406,
+      "signed_error_cycles": 15.812203815744056,
+      "absolute_error_cycles": 15.812203815744056
+    },
+    {
+      "engine_id": "test:FD001:74",
+      "unit": 74,
+      "last_observed_cycle": 137,
+      "actual_rul_cycles": 126,
+      "predicted_rul_cycles": 88.59436577112572,
+      "signed_error_cycles": -37.40563422887428,
+      "absolute_error_cycles": 37.40563422887428
+    },
+    {
+      "engine_id": "test:FD001:75",
+      "unit": 75,
+      "last_observed_cycle": 88,
+      "actual_rul_cycles": 113,
+      "predicted_rul_cycles": 142.16253293009967,
+      "signed_error_cycles": 29.162532930099673,
+      "absolute_error_cycles": 29.162532930099673
+    },
+    {
+      "engine_id": "test:FD001:76",
+      "unit": 76,
+      "last_observed_cycle": 205,
+      "actual_rul_cycles": 10,
+      "predicted_rul_cycles": 12.547589040287617,
+      "signed_error_cycles": 2.547589040287617,
+      "absolute_error_cycles": 2.547589040287617
+    },
+    {
+      "engine_id": "test:FD001:77",
+      "unit": 77,
+      "last_observed_cycle": 162,
+      "actual_rul_cycles": 34,
+      "predicted_rul_cycles": 66.37900964717845,
+      "signed_error_cycles": 32.37900964717845,
+      "absolute_error_cycles": 32.37900964717845
+    },
+    {
+      "engine_id": "test:FD001:78",
+      "unit": 78,
+      "last_observed_cycle": 72,
+      "actual_rul_cycles": 107,
+      "predicted_rul_cycles": 157.0272408732432,
+      "signed_error_cycles": 50.02724087324319,
+      "absolute_error_cycles": 50.02724087324319
+    },
+    {
+      "engine_id": "test:FD001:79",
+      "unit": 79,
+      "last_observed_cycle": 101,
+      "actual_rul_cycles": 63,
+      "predicted_rul_cycles": 107.8112541162423,
+      "signed_error_cycles": 44.811254116242296,
+      "absolute_error_cycles": 44.811254116242296
+    },
+    {
+      "engine_id": "test:FD001:80",
+      "unit": 80,
+      "last_observed_cycle": 133,
+      "actual_rul_cycles": 90,
+      "predicted_rul_cycles": 104.27469717843856,
+      "signed_error_cycles": 14.274697178438558,
+      "absolute_error_cycles": 14.274697178438558
+    },
+    {
+      "engine_id": "test:FD001:81",
+      "unit": 81,
+      "last_observed_cycle": 213,
+      "actual_rul_cycles": 8,
+      "predicted_rul_cycles": 13.571186031610445,
+      "signed_error_cycles": 5.571186031610445,
+      "absolute_error_cycles": 5.571186031610445
+    },
+    {
+      "engine_id": "test:FD001:82",
+      "unit": 82,
+      "last_observed_cycle": 162,
+      "actual_rul_cycles": 9,
+      "predicted_rul_cycles": 7.2035195802757,
+      "signed_error_cycles": -1.7964804197242996,
+      "absolute_error_cycles": 1.7964804197242996
+    },
+    {
+      "engine_id": "test:FD001:83",
+      "unit": 83,
+      "last_observed_cycle": 73,
+      "actual_rul_cycles": 137,
+      "predicted_rul_cycles": 217.30979618443345,
+      "signed_error_cycles": 80.30979618443345,
+      "absolute_error_cycles": 80.30979618443345
+    },
+    {
+      "engine_id": "test:FD001:84",
+      "unit": 84,
+      "last_observed_cycle": 172,
+      "actual_rul_cycles": 58,
+      "predicted_rul_cycles": 67.8045957886036,
+      "signed_error_cycles": 9.804595788603606,
+      "absolute_error_cycles": 9.804595788603606
+    },
+    {
+      "engine_id": "test:FD001:85",
+      "unit": 85,
+      "last_observed_cycle": 34,
+      "actual_rul_cycles": 118,
+      "predicted_rul_cycles": 176.74083536772702,
+      "signed_error_cycles": 58.740835367727016,
+      "absolute_error_cycles": 58.740835367727016
+    },
+    {
+      "engine_id": "test:FD001:86",
+      "unit": 86,
+      "last_observed_cycle": 110,
+      "actual_rul_cycles": 89,
+      "predicted_rul_cycles": 94.7209723550019,
+      "signed_error_cycles": 5.720972355001905,
+      "absolute_error_cycles": 5.720972355001905
+    },
+    {
+      "engine_id": "test:FD001:87",
+      "unit": 87,
+      "last_observed_cycle": 56,
+      "actual_rul_cycles": 116,
+      "predicted_rul_cycles": 157.86832088001273,
+      "signed_error_cycles": 41.86832088001273,
+      "absolute_error_cycles": 41.86832088001273
+    },
+    {
+      "engine_id": "test:FD001:88",
+      "unit": 88,
+      "last_observed_cycle": 68,
+      "actual_rul_cycles": 115,
+      "predicted_rul_cycles": 137.27417865808027,
+      "signed_error_cycles": 22.274178658080274,
+      "absolute_error_cycles": 22.274178658080274
+    },
+    {
+      "engine_id": "test:FD001:89",
+      "unit": 89,
+      "last_observed_cycle": 177,
+      "actual_rul_cycles": 136,
+      "predicted_rul_cycles": 106.80202011239817,
+      "signed_error_cycles": -29.197979887601832,
+      "absolute_error_cycles": 29.197979887601832
+    },
+    {
+      "engine_id": "test:FD001:90",
+      "unit": 90,
+      "last_observed_cycle": 146,
+      "actual_rul_cycles": 28,
+      "predicted_rul_cycles": 28.034595964544046,
+      "signed_error_cycles": 0.0345959645440459,
+      "absolute_error_cycles": 0.0345959645440459
+    },
+    {
+      "engine_id": "test:FD001:91",
+      "unit": 91,
+      "last_observed_cycle": 234,
+      "actual_rul_cycles": 38,
+      "predicted_rul_cycles": 31.128918358880767,
+      "signed_error_cycles": -6.871081641119233,
+      "absolute_error_cycles": 6.871081641119233
+    },
+    {
+      "engine_id": "test:FD001:92",
+      "unit": 92,
+      "last_observed_cycle": 150,
+      "actual_rul_cycles": 20,
+      "predicted_rul_cycles": 15.573817187706268,
+      "signed_error_cycles": -4.426182812293732,
+      "absolute_error_cycles": 4.426182812293732
+    },
+    {
+      "engine_id": "test:FD001:93",
+      "unit": 93,
+      "last_observed_cycle": 244,
+      "actual_rul_cycles": 85,
+      "predicted_rul_cycles": 46.13316460558659,
+      "signed_error_cycles": -38.86683539441341,
+      "absolute_error_cycles": 38.86683539441341
+    },
+    {
+      "engine_id": "test:FD001:94",
+      "unit": 94,
+      "last_observed_cycle": 133,
+      "actual_rul_cycles": 55,
+      "predicted_rul_cycles": 66.88697117341474,
+      "signed_error_cycles": 11.886971173414736,
+      "absolute_error_cycles": 11.886971173414736
+    },
+    {
+      "engine_id": "test:FD001:95",
+      "unit": 95,
+      "last_observed_cycle": 89,
+      "actual_rul_cycles": 128,
+      "predicted_rul_cycles": 119.05684690899854,
+      "signed_error_cycles": -8.943153091001463,
+      "absolute_error_cycles": 8.943153091001463
+    },
+    {
+      "engine_id": "test:FD001:96",
+      "unit": 96,
+      "last_observed_cycle": 97,
+      "actual_rul_cycles": 137,
+      "predicted_rul_cycles": 106.39861036726444,
+      "signed_error_cycles": -30.60138963273556,
+      "absolute_error_cycles": 30.60138963273556
+    },
+    {
+      "engine_id": "test:FD001:97",
+      "unit": 97,
+      "last_observed_cycle": 134,
+      "actual_rul_cycles": 82,
+      "predicted_rul_cycles": 81.32173823512784,
+      "signed_error_cycles": -0.6782617648721612,
+      "absolute_error_cycles": 0.6782617648721612
+    },
+    {
+      "engine_id": "test:FD001:98",
+      "unit": 98,
+      "last_observed_cycle": 121,
+      "actual_rul_cycles": 59,
+      "predicted_rul_cycles": 80.55901381019554,
+      "signed_error_cycles": 21.559013810195538,
+      "absolute_error_cycles": 21.559013810195538
+    },
+    {
+      "engine_id": "test:FD001:99",
+      "unit": 99,
+      "last_observed_cycle": 97,
+      "actual_rul_cycles": 117,
+      "predicted_rul_cycles": 154.2970689176671,
+      "signed_error_cycles": 37.297068917667104,
+      "absolute_error_cycles": 37.297068917667104
+    },
+    {
+      "engine_id": "test:FD001:100",
+      "unit": 100,
+      "last_observed_cycle": 198,
+      "actual_rul_cycles": 20,
+      "predicted_rul_cycles": 21.213517484451348,
+      "signed_error_cycles": 1.2135174844513479,
+      "absolute_error_cycles": 1.2135174844513479
+    }
+  ],
+  "all_window_secondary": {
+    "aggregation": "all observed test cycles equally weighted; longer trajectories contribute more rows",
+    "hist_gradient_boosting": {
+      "mae_cycles": 34.143198964416406,
+      "rmse_cycles": 44.22849642138144
+    },
+    "constant_baseline": {
+      "mae_cycles": 52.81877973792098,
+      "rmse_cycles": 66.3090592205629
+    },
+    "n_windows": 13096
+  },
+  "inputs": {
+    "test_sensors_sha256": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "endpoint_labels_sha256": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "artifact_sha256": "2fa1a538304661af10d98206d72b16dd7f79717fb7e03d1feb06e194c2476138",
+    "protocol_sha256": "eafacba07371a88e2d6b3d22321fb37e9dfc56b85a2bc5c1386436d65f3667b2"
+  },
+  "test_feedback_used_for_model_selection": false
+}

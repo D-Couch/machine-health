@@ -1,0 +1,19 @@
+{
+  "report": "official_test_v1.json",
+  "reason": "Provenance clarification recorded after the first frozen scoring run",
+  "protocol_commit": "a2223a5",
+  "base_head_at_scoring": "a2223a5",
+  "working_tree_clean_at_scoring": false,
+  "scoring_code_was_committed_at_scoring": false,
+  "test_feedback_used_for_model_or_threshold_selection": false,
+  "metrics_changed": false,
+  "rescored": false,
+  "note": "The committed evaluation protocol preceded scoring. The evaluation implementation itself was uncommitted when the first test report was produced. The original JSON and Markdown report are preserved unchanged; hashes below identify the scoring implementation and its shared input/model dependencies as they stood at the time of this clarification. Do not interpret the report's code_revision field alone as proving a clean source tree.",
+  "scoring_source_sha256": {
+    "src/machine_health/frozen_evaluation.py": "3d658cf485ad980b7b98b95b029c79f6e8aa13e5c3c0e68f22f65e236720e9ac",
+    "src/machine_health/data.py": "bd6a45ea449f345bfb86039304c525ba1217c69d9fd7b7202310289dea036845",
+    "src/machine_health/features.py": "481a4a7d73a8c17ab1ecf0628f84c892d13c20ea68dfb265888ff802bb3b7638",
+    "src/machine_health/model.py": "4dc84c7d707921eb8c2ecd1ff100ef5954bf73df5b8183b4304125d6a42d690a",
+    "src/machine_health/pipeline.py": "69b17df4ebfcae7668a7f0af48694e095cdf91d1543767463b7bbfb1d6459b33"
+  }
+}

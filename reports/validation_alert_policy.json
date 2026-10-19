@@ -1,0 +1,2809 @@
+{
+  "dataset": "NASA C-MAPSS FD001 held-out validation engines only; no official test labels used",
+  "policy": {
+    "actionable_horizon_cycles": 30,
+    "persistence_cycles": 3,
+    "minimum_history_cycles": 20,
+    "early_false_alarm_definition": "first persistent alert when actual RUL exceeds the 30-cycle actionable horizon",
+    "timely_detection_definition": "first persistent alert at actual RUL 1 through 30 inclusive",
+    "miss_definition": "no alert in the actionable horizon, or alert only at failure (RUL 0)",
+    "threshold_selection": "maximize timely detection rate subject to at most 10% early false-alarm engines; ties choose the lower threshold",
+    "false_alarm_constraint_met": true
+  },
+  "selected_threshold_cycles": 20,
+  "selected_validation_result": {
+    "threshold_cycles": 20,
+    "engines": 20,
+    "early_false_alarm_engines": 0,
+    "early_false_alarm_rate": 0.0,
+    "timely_detection_engines": 20,
+    "timely_detection_rate": 1.0,
+    "missed_failures": 0,
+    "miss_rate": 0.0,
+    "mean_timely_lead_time_cycles": 11.75,
+    "events": [
+      {
+        "engine_id": "train:FD001:1",
+        "category": "timely",
+        "lead_time_cycles": 6,
+        "alert_cycle": 186
+      },
+      {
+        "engine_id": "train:FD001:100",
+        "category": "timely",
+        "lead_time_cycles": 7,
+        "alert_cycle": 193
+      },
+      {
+        "engine_id": "train:FD001:14",
+        "category": "timely",
+        "lead_time_cycles": 11,
+        "alert_cycle": 169
+      },
+      {
+        "engine_id": "train:FD001:23",
+        "category": "timely",
+        "lead_time_cycles": 12,
+        "alert_cycle": 156
+      },
+      {
+        "engine_id": "train:FD001:30",
+        "category": "timely",
+        "lead_time_cycles": 9,
+        "alert_cycle": 185
+      },
+      {
+        "engine_id": "train:FD001:31",
+        "category": "timely",
+        "lead_time_cycles": 11,
+        "alert_cycle": 223
+      },
+      {
+        "engine_id": "train:FD001:33",
+        "category": "timely",
+        "lead_time_cycles": 4,
+        "alert_cycle": 196
+      },
+      {
+        "engine_id": "train:FD001:38",
+        "category": "timely",
+        "lead_time_cycles": 16,
+        "alert_cycle": 178
+      },
+      {
+        "engine_id": "train:FD001:39",
+        "category": "timely",
+        "lead_time_cycles": 12,
+        "alert_cycle": 116
+      },
+      {
+        "engine_id": "train:FD001:42",
+        "category": "timely",
+        "lead_time_cycles": 13,
+        "alert_cycle": 183
+      },
+      {
+        "engine_id": "train:FD001:47",
+        "category": "timely",
+        "lead_time_cycles": 12,
+        "alert_cycle": 202
+      },
+      {
+        "engine_id": "train:FD001:58",
+        "category": "timely",
+        "lead_time_cycles": 9,
+        "alert_cycle": 138
+      },
+      {
+        "engine_id": "train:FD001:60",
+        "category": "timely",
+        "lead_time_cycles": 12,
+        "alert_cycle": 160
+      },
+      {
+        "engine_id": "train:FD001:63",
+        "category": "timely",
+        "lead_time_cycles": 13,
+        "alert_cycle": 161
+      },
+      {
+        "engine_id": "train:FD001:70",
+        "category": "timely",
+        "lead_time_cycles": 16,
+        "alert_cycle": 121
+      },
+      {
+        "engine_id": "train:FD001:74",
+        "category": "timely",
+        "lead_time_cycles": 13,
+        "alert_cycle": 153
+      },
+      {
+        "engine_id": "train:FD001:8",
+        "category": "timely",
+        "lead_time_cycles": 10,
+        "alert_cycle": 140
+      },
+      {
+        "engine_id": "train:FD001:80",
+        "category": "timely",
+        "lead_time_cycles": 16,
+        "alert_cycle": 169
+      },
+      {
+        "engine_id": "train:FD001:93",
+        "category": "timely",
+        "lead_time_cycles": 10,
+        "alert_cycle": 145
+      },
+      {
+        "engine_id": "train:FD001:94",
+        "category": "timely",
+        "lead_time_cycles": 23,
+        "alert_cycle": 235
+      }
+    ]
+  },
+  "candidate_results": [
+    {
+      "threshold_cycles": 5,
+      "engines": 20,
+      "early_false_alarm_engines": 0,
+      "early_false_alarm_rate": 0.0,
+      "timely_detection_engines": 11,
+      "timely_detection_rate": 0.55,
+      "missed_failures": 9,
+      "miss_rate": 0.45,
+      "mean_timely_lead_time_cycles": 3.727272727272727,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": 180
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 3,
+          "alert_cycle": 231
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 1,
+          "alert_cycle": 199
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "timely",
+          "lead_time_cycles": 2,
+          "alert_cycle": 192
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 5,
+          "alert_cycle": 123
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 2,
+          "alert_cycle": 212
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 6,
+          "alert_cycle": 141
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 1,
+          "alert_cycle": 171
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 1,
+          "alert_cycle": 136
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 157
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "timely",
+          "lead_time_cycles": 5,
+          "alert_cycle": 180
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": 155
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "timely",
+          "lead_time_cycles": 6,
+          "alert_cycle": 252
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 10,
+      "engines": 20,
+      "early_false_alarm_engines": 0,
+      "early_false_alarm_rate": 0.0,
+      "timely_detection_engines": 17,
+      "timely_detection_rate": 0.85,
+      "missed_failures": 3,
+      "miss_rate": 0.15,
+      "mean_timely_lead_time_cycles": 6.117647058823529,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": 192
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "timely",
+          "lead_time_cycles": 3,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 4,
+          "alert_cycle": 164
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 5,
+          "alert_cycle": 189
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 8,
+          "alert_cycle": 226
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 2,
+          "alert_cycle": 198
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "timely",
+          "lead_time_cycles": 7,
+          "alert_cycle": 187
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 6,
+          "alert_cycle": 122
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": null
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 5,
+          "alert_cycle": 209
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 138
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 163
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "timely",
+          "lead_time_cycles": 3,
+          "alert_cycle": 171
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 4,
+          "alert_cycle": 133
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 10,
+          "alert_cycle": 156
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 7,
+          "alert_cycle": 143
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "timely",
+          "lead_time_cycles": 8,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 5,
+          "alert_cycle": 150
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 249
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 15,
+      "engines": 20,
+      "early_false_alarm_engines": 0,
+      "early_false_alarm_rate": 0.0,
+      "timely_detection_engines": 19,
+      "timely_detection_rate": 0.95,
+      "missed_failures": 1,
+      "miss_rate": 0.05,
+      "mean_timely_lead_time_cycles": 10.052631578947368,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 4,
+          "alert_cycle": 188
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "missed",
+          "lead_time_cycles": null,
+          "alert_cycle": 200
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 171
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 7,
+          "alert_cycle": 161
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 8,
+          "alert_cycle": 186
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 223
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 3,
+          "alert_cycle": 197
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 180
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 10,
+          "alert_cycle": 118
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 184
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 8,
+          "alert_cycle": 206
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 138
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 161
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 163
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 155
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 10,
+          "alert_cycle": 140
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 174
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 146
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 237
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 20,
+      "engines": 20,
+      "early_false_alarm_engines": 0,
+      "early_false_alarm_rate": 0.0,
+      "timely_detection_engines": 20,
+      "timely_detection_rate": 1.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 11.75,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 6,
+          "alert_cycle": 186
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "timely",
+          "lead_time_cycles": 7,
+          "alert_cycle": 193
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 169
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 156
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 185
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 223
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 4,
+          "alert_cycle": 196
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "timely",
+          "lead_time_cycles": 16,
+          "alert_cycle": 178
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 116
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 183
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 202
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 138
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 160
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 161
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 16,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 153
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 10,
+          "alert_cycle": 140
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "timely",
+          "lead_time_cycles": 16,
+          "alert_cycle": 169
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 10,
+          "alert_cycle": 145
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "timely",
+          "lead_time_cycles": 23,
+          "alert_cycle": 235
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 25,
+      "engines": 20,
+      "early_false_alarm_engines": 1,
+      "early_false_alarm_rate": 0.05,
+      "timely_detection_engines": 19,
+      "timely_detection_rate": 0.95,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 15.578947368421053,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 8,
+          "alert_cycle": 184
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "timely",
+          "lead_time_cycles": 8,
+          "alert_cycle": 192
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 159
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 10,
+          "alert_cycle": 184
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 220
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 191
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 170
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 115
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 183
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 196
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 134
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 152
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 150
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 16,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 152
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 126
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 163
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 144
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 227
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 30,
+      "engines": 20,
+      "early_false_alarm_engines": 2,
+      "early_false_alarm_rate": 0.1,
+      "timely_detection_engines": 18,
+      "timely_detection_rate": 0.9,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 17.055555555555557,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 12,
+          "alert_cycle": 180
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 189
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 158
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 147
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 181
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 219
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 9,
+          "alert_cycle": 191
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 114
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 182
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 196
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 134
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 150
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "timely",
+          "lead_time_cycles": 26,
+          "alert_cycle": 148
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 119
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 14,
+          "alert_cycle": 152
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 126
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "timely",
+          "lead_time_cycles": 26,
+          "alert_cycle": 159
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 140
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 33,
+          "alert_cycle": 225
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 35,
+      "engines": 20,
+      "early_false_alarm_engines": 4,
+      "early_false_alarm_rate": 0.2,
+      "timely_detection_engines": 16,
+      "timely_detection_rate": 0.8,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 19.5,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 179
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "timely",
+          "lead_time_cycles": 27,
+          "alert_cycle": 173
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 35,
+          "alert_cycle": 145
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 140
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 179
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 214
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 189
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 43,
+          "alert_cycle": 151
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 113
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 19,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 194
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 148
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 146
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 117
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 17,
+          "alert_cycle": 149
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 126
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 16,
+          "alert_cycle": 139
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 37,
+          "alert_cycle": 221
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 40,
+      "engines": 20,
+      "early_false_alarm_engines": 7,
+      "early_false_alarm_rate": 0.35,
+      "timely_detection_engines": 13,
+      "timely_detection_rate": 0.65,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 19.53846153846154,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 174
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 169
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 35,
+          "alert_cycle": 145
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "timely",
+          "lead_time_cycles": 30,
+          "alert_cycle": 138
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 17,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 212
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 11,
+          "alert_cycle": 189
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 44,
+          "alert_cycle": 150
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 113
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 175
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 193
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 15,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 32,
+          "alert_cycle": 140
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 138
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 117
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 145
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 25,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 149
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 137
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 212
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 45,
+      "engines": 20,
+      "early_false_alarm_engines": 8,
+      "early_false_alarm_rate": 0.4,
+      "timely_detection_engines": 12,
+      "timely_detection_rate": 0.6,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 21.333333333333332,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 27,
+          "alert_cycle": 165
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 169
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 139
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 34,
+          "alert_cycle": 134
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 174
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 212
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 13,
+          "alert_cycle": 187
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 148
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 16,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 175
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 186
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 129
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 134
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 42,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 23,
+          "alert_cycle": 114
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 23,
+          "alert_cycle": 143
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 27,
+          "alert_cycle": 123
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 147
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 18,
+          "alert_cycle": 137
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 59,
+          "alert_cycle": 199
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 50,
+      "engines": 20,
+      "early_false_alarm_engines": 9,
+      "early_false_alarm_rate": 0.45,
+      "timely_detection_engines": 11,
+      "timely_detection_rate": 0.55,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 23.0,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "timely",
+          "lead_time_cycles": 27,
+          "alert_cycle": 165
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 164
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 44,
+          "alert_cycle": 136
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 174
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 27,
+          "alert_cycle": 207
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 19,
+          "alert_cycle": 181
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 47,
+          "alert_cycle": 147
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 19,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 172
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 178
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 127
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 126
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 42,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 24,
+          "alert_cycle": 113
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 25,
+          "alert_cycle": 141
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "timely",
+          "lead_time_cycles": 29,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 44,
+          "alert_cycle": 141
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 19,
+          "alert_cycle": 136
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 60,
+          "alert_cycle": 198
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 55,
+      "engines": 20,
+      "early_false_alarm_engines": 11,
+      "early_false_alarm_rate": 0.55,
+      "timely_detection_engines": 9,
+      "timely_detection_rate": 0.45,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 23.666666666666668,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 164
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 50,
+          "alert_cycle": 130
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 47,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 174
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 206
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 180
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 47,
+          "alert_cycle": 147
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 20,
+          "alert_cycle": 108
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "timely",
+          "lead_time_cycles": 30,
+          "alert_cycle": 166
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 168
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 126
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 47,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 47,
+          "alert_cycle": 127
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "timely",
+          "lead_time_cycles": 25,
+          "alert_cycle": 141
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 34,
+          "alert_cycle": 116
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 60,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 21,
+          "alert_cycle": 134
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 73,
+          "alert_cycle": 185
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 60,
+      "engines": 20,
+      "early_false_alarm_engines": 15,
+      "early_false_alarm_rate": 0.75,
+      "timely_detection_engines": 5,
+      "timely_detection_rate": 0.25,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 23.4,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 160
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 55,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 48,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 172
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 198
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 23,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 143
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 106
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 160
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 54,
+          "alert_cycle": 160
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 116
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 62,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 33,
+          "alert_cycle": 133
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 60,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 22,
+          "alert_cycle": 133
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 75,
+          "alert_cycle": 183
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 65,
+      "engines": 20,
+      "early_false_alarm_engines": 16,
+      "early_false_alarm_rate": 0.8,
+      "timely_detection_engines": 4,
+      "timely_detection_rate": 0.2,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 24.5,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 152
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 160
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 70,
+          "alert_cycle": 110
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 49,
+          "alert_cycle": 119
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 26,
+          "alert_cycle": 168
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 194
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 26,
+          "alert_cycle": 174
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 143
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 23,
+          "alert_cycle": 105
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 37,
+          "alert_cycle": 159
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 56,
+          "alert_cycle": 158
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 116
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 111
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 106
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 34,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 72,
+          "alert_cycle": 113
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "timely",
+          "lead_time_cycles": 23,
+          "alert_cycle": 132
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 82,
+          "alert_cycle": 176
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 70,
+      "engines": 20,
+      "early_false_alarm_engines": 17,
+      "early_false_alarm_rate": 0.85,
+      "timely_detection_engines": 3,
+      "timely_detection_rate": 0.15,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": 27.333333333333332,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 151
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 71,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 49,
+          "alert_cycle": 119
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 166
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 42,
+          "alert_cycle": 192
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "timely",
+          "lead_time_cycles": 28,
+          "alert_cycle": 172
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 73,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "timely",
+          "lead_time_cycles": 26,
+          "alert_cycle": 102
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 37,
+          "alert_cycle": 159
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 59,
+          "alert_cycle": 155
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 116
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 52,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 111
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 106
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 49,
+          "alert_cycle": 117
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 39,
+          "alert_cycle": 111
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 73,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 33,
+          "alert_cycle": 122
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 85,
+          "alert_cycle": 173
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 75,
+      "engines": 20,
+      "early_false_alarm_engines": 20,
+      "early_false_alarm_rate": 1.0,
+      "timely_detection_engines": 0,
+      "timely_detection_rate": 0.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": null,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 151
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 154
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 81,
+          "alert_cycle": 99
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 50,
+          "alert_cycle": 118
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 163
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 43,
+          "alert_cycle": 191
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 32,
+          "alert_cycle": 168
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 75,
+          "alert_cycle": 119
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 92
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 58,
+          "alert_cycle": 138
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 59,
+          "alert_cycle": 155
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 35,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 52,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 111
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 34,
+          "alert_cycle": 103
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 115
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 110
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 75,
+          "alert_cycle": 110
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 34,
+          "alert_cycle": 121
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 94,
+          "alert_cycle": 164
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 80,
+      "engines": 20,
+      "early_false_alarm_engines": 20,
+      "early_false_alarm_rate": 1.0,
+      "timely_detection_engines": 0,
+      "timely_detection_rate": 0.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": null,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 43,
+          "alert_cycle": 149
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 61,
+          "alert_cycle": 139
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 82,
+          "alert_cycle": 98
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 117
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 31,
+          "alert_cycle": 163
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 44,
+          "alert_cycle": 190
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 32,
+          "alert_cycle": 168
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 76,
+          "alert_cycle": 118
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 36,
+          "alert_cycle": 92
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 60,
+          "alert_cycle": 136
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 68,
+          "alert_cycle": 146
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 38,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 52,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 65,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 35,
+          "alert_cycle": 102
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 115
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 75,
+          "alert_cycle": 110
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 35,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 99,
+          "alert_cycle": 159
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 85,
+      "engines": 20,
+      "early_false_alarm_engines": 20,
+      "early_false_alarm_rate": 1.0,
+      "timely_detection_engines": 0,
+      "timely_detection_rate": 0.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": null,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 65,
+          "alert_cycle": 127
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 137
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 83,
+          "alert_cycle": 97
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 117
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 32,
+          "alert_cycle": 162
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 56,
+          "alert_cycle": 178
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 47,
+          "alert_cycle": 153
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 78,
+          "alert_cycle": 116
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 42,
+          "alert_cycle": 86
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 60,
+          "alert_cycle": 136
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 75,
+          "alert_cycle": 139
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 39,
+          "alert_cycle": 108
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 52,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 67,
+          "alert_cycle": 107
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 39,
+          "alert_cycle": 98
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 62,
+          "alert_cycle": 104
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 58,
+          "alert_cycle": 92
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 76,
+          "alert_cycle": 109
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 35,
+          "alert_cycle": 120
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 102,
+          "alert_cycle": 156
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 90,
+      "engines": 20,
+      "early_false_alarm_engines": 20,
+      "early_false_alarm_rate": 1.0,
+      "timely_detection_engines": 0,
+      "timely_detection_rate": 0.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": null,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 65,
+          "alert_cycle": 127
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 137
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 84,
+          "alert_cycle": 96
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 56,
+          "alert_cycle": 112
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 32,
+          "alert_cycle": 162
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 57,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 48,
+          "alert_cycle": 152
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 86,
+          "alert_cycle": 108
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 43,
+          "alert_cycle": 85
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 66,
+          "alert_cycle": 130
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 81,
+          "alert_cycle": 133
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 40,
+          "alert_cycle": 107
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 67,
+          "alert_cycle": 105
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 74,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 39,
+          "alert_cycle": 98
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 62,
+          "alert_cycle": 104
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 58,
+          "alert_cycle": 92
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 85,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 37,
+          "alert_cycle": 118
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 120,
+          "alert_cycle": 138
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 95,
+      "engines": 20,
+      "early_false_alarm_engines": 20,
+      "early_false_alarm_rate": 1.0,
+      "timely_detection_engines": 0,
+      "timely_detection_rate": 0.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": null,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 65,
+          "alert_cycle": 127
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 65,
+          "alert_cycle": 135
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 88,
+          "alert_cycle": 92
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 57,
+          "alert_cycle": 111
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 32,
+          "alert_cycle": 162
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 57,
+          "alert_cycle": 177
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 60,
+          "alert_cycle": 140
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 88,
+          "alert_cycle": 106
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 44,
+          "alert_cycle": 84
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 66,
+          "alert_cycle": 130
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 88,
+          "alert_cycle": 126
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 106
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 72,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 81,
+          "alert_cycle": 93
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 96
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 66,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 87
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 85,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 37,
+          "alert_cycle": 118
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 120,
+          "alert_cycle": 138
+        }
+      ]
+    },
+    {
+      "threshold_cycles": 100,
+      "engines": 20,
+      "early_false_alarm_engines": 20,
+      "early_false_alarm_rate": 1.0,
+      "timely_detection_engines": 0,
+      "timely_detection_rate": 0.0,
+      "missed_failures": 0,
+      "miss_rate": 0.0,
+      "mean_timely_lead_time_cycles": null,
+      "events": [
+        {
+          "engine_id": "train:FD001:1",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 67,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 71,
+          "alert_cycle": 129
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 88,
+          "alert_cycle": 92
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 105
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 53,
+          "alert_cycle": 141
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 58,
+          "alert_cycle": 176
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 64,
+          "alert_cycle": 136
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 89,
+          "alert_cycle": 105
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 46,
+          "alert_cycle": 82
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 69,
+          "alert_cycle": 127
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 89,
+          "alert_cycle": 125
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 51,
+          "alert_cycle": 96
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 72,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 86,
+          "alert_cycle": 88
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 41,
+          "alert_cycle": 96
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 66,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 63,
+          "alert_cycle": 87
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 85,
+          "alert_cycle": 100
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 45,
+          "alert_cycle": 110
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "category": "early_false_alarm",
+          "lead_time_cycles": 134,
+          "alert_cycle": 124
+        }
+      ]
+    }
+  ]
+}

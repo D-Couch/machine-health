@@ -1,0 +1,16 @@
+services:
+  dashboard:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data/raw:/app/data/raw:ro
+      - ./artifacts:/app/artifacts:ro
+      - ./reports:/app/reports:ro
+  api:
+    build: .
+    command: ["uvicorn", "machine_health.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts:/app/artifacts:ro

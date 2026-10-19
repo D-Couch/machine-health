@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import zipfile
 from pathlib import Path
@@ -43,6 +44,30 @@ def acquire(destination: Path) -> Path:
     return extracted
 
 
+def acquire_official_test(archive: Path, destination: Path) -> tuple[Path, Path]:
+    """Extract official FD001 test sensors and endpoint labels from the NASA archive."""
+    destination.mkdir(parents=True, exist_ok=True)
+    outputs = (destination / "test_FD001.txt", destination / "RUL_FD001.txt")
+    wanted = ("test_fd001.txt", "rul_fd001.txt")
+    with zipfile.ZipFile(archive) as outer:
+        if all(any(name.lower().endswith(target) for name in outer.namelist()) for target in wanted):
+            bundle = outer
+            for target, output in zip(wanted, outputs, strict=True):
+                match = next(name for name in bundle.namelist() if name.lower().endswith(target))
+                output.write_bytes(bundle.read(match))
+        else:
+            nested = [name for name in outer.namelist() if name.lower().endswith("cmapssdata.zip")]
+            if len(nested) != 1:
+                raise ValueError(f"Expected one nested CMAPSSData.zip; found {nested}")
+            with zipfile.ZipFile(io.BytesIO(outer.read(nested[0]))) as inner:
+                for target, output in zip(wanted, outputs, strict=True):
+                    matches = [name for name in inner.namelist() if name.lower().endswith(target)]
+                    if len(matches) != 1:
+                        raise ValueError(f"Expected one {target}; found {matches}")
+                    output.write_bytes(inner.read(matches[0]))
+    return outputs
+
+
 def load_fd001(path: Path, partition: str = "train") -> pd.DataFrame:
     frame = pd.read_csv(path, sep=r"\s+", header=None)
     if frame.shape[1] != len(COLUMNS):
@@ -63,6 +88,21 @@ def attach_rul(frame: pd.DataFrame) -> pd.DataFrame:
     result = frame.copy()
     endpoints = result.groupby("engine_id")["cycle"].transform("max")
     result["rul"] = endpoints - result["cycle"]
+    return result
+
+
+def attach_test_endpoint_rul(frame: pd.DataFrame, labels_path: Path) -> pd.DataFrame:
+    """Attach retrospective scoring labels; these must never enter inference features."""
+    result = frame.copy()
+    units = sorted(result["unit"].unique())
+    labels = np.loadtxt(labels_path, dtype=int, ndmin=1)
+    if len(labels) != len(units):
+        raise ValueError(f"Expected {len(units)} endpoint labels, got {len(labels)}")
+    if (labels < 0).any():
+        raise ValueError("Endpoint RUL labels must be non-negative")
+    endpoint_by_unit = dict(zip(units, labels, strict=True))
+    last_cycle = result.groupby("unit")["cycle"].transform("max")
+    result["rul"] = result["unit"].map(endpoint_by_unit) + last_cycle - result["cycle"]
     return result
 
 

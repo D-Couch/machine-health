@@ -3,7 +3,15 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from machine_health.pipeline import ROOT, evaluate_saved, prepare, train
+from machine_health.pipeline import (
+    ROOT,
+    evaluate_saved,
+    evaluate_test,
+    prepare,
+    select_alert_policy,
+    train,
+)
+from machine_health.run_store import list_runs
 
 
 def main() -> None:
@@ -25,6 +33,18 @@ def main() -> None:
     replay.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
     replay.add_argument("--split", type=Path, default=ROOT / "reports/fd001_split.json")
     replay.add_argument("--output", type=Path, default=ROOT / "data/processed/validation_replay.csv")
+    test_eval = sub.add_parser("evaluate-test", help="Run frozen official test evaluation exactly once")
+    test_eval.add_argument("--data", type=Path, default=ROOT / "data/raw")
+    test_eval.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
+    test_eval.add_argument("--output", type=Path, default=ROOT / "reports/official_test_v1.json")
+    alert = sub.add_parser("select-alert-policy", help="Select alert threshold on validation engines only")
+    alert.add_argument("--data", type=Path, default=ROOT / "data/raw/train_FD001.txt")
+    alert.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
+    alert.add_argument("--split", type=Path, default=ROOT / "reports/fd001_split.json")
+    alert.add_argument("--output", type=Path, default=ROOT / "reports/validation_alert_policy.json")
+    runs = sub.add_parser("list-runs", help="List recorded train/evaluation runs from SQLite")
+    runs.add_argument("--database", type=Path, default=ROOT / "data/experiments.sqlite")
+    runs.add_argument("--limit", type=int, default=20)
     args = parser.parse_args()
     if args.command == "prepare":
         path = args.file or prepare(args.data)
@@ -36,7 +56,7 @@ def main() -> None:
     elif args.command == "evaluate-validation":
         result = evaluate_saved(args.data, args.artifact, args.split, args.output)
         print(f"Validation endpoint MAE={result['endpoint']['mae_cycles']:.3f} cycles; report={args.output.with_suffix('.md')}")
-    else:
+    elif args.command == "replay":
         import json
 
         from machine_health.data import attach_rul, load_fd001
@@ -52,3 +72,13 @@ def main() -> None:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         output.to_csv(args.output, index=False)
         print(f"Wrote {len(output)} validation replay rows to {args.output}")
+    elif args.command == "list-runs":
+        import json
+
+        print(json.dumps(list_runs(args.database, args.limit), indent=2))
+    elif args.command == "select-alert-policy":
+        result = select_alert_policy(args.data, args.artifact, args.split, args.output)
+        print(f"Selected threshold={result['selected_threshold_cycles']} cycles on validation engines")
+    else:
+        result = evaluate_test(args.data, args.artifact, args.output)
+        print(f"Official test endpoint MAE={result['primary_model']['mae_cycles']:.3f} cycles; report={args.output.with_suffix('.md')}")
