@@ -1,0 +1,184 @@
+{
+  "dataset": "NASA C-MAPSS FD001; engine-held-out validation, not official test",
+  "split_engines": [
+    "train:FD001:1",
+    "train:FD001:100",
+    "train:FD001:14",
+    "train:FD001:23",
+    "train:FD001:30",
+    "train:FD001:31",
+    "train:FD001:33",
+    "train:FD001:38",
+    "train:FD001:39",
+    "train:FD001:42",
+    "train:FD001:47",
+    "train:FD001:58",
+    "train:FD001:60",
+    "train:FD001:63",
+    "train:FD001:70",
+    "train:FD001:74",
+    "train:FD001:8",
+    "train:FD001:80",
+    "train:FD001:93",
+    "train:FD001:94"
+  ],
+  "n_windows": 3644,
+  "n_engines": 20,
+  "aggregation": "window-weighted; all cycles from each held-out run-to-failure engine",
+  "constant_baseline": {
+    "mae_cycles": 50.463665279777125,
+    "rmse_cycles": 59.821784234945405
+  },
+  "hist_gradient_boosting": {
+    "mae_cycles": 26.032251681794385,
+    "rmse_cycles": 33.67878504864834
+  },
+  "endpoint": {
+    "mae_cycles": 2.9873302500697765,
+    "rmse_cycles": 4.781894947821727
+  },
+  "by_rul_range": {
+    "0-19": {
+      "mae_cycles": 5.655467807542658,
+      "rmse_cycles": 8.138924417665818,
+      "n_windows": 400
+    },
+    "20-49": {
+      "mae_cycles": 20.07759004137889,
+      "rmse_cycles": 26.005082705074244,
+      "n_windows": 600
+    },
+    "50-99": {
+      "mae_cycles": 31.91773552036095,
+      "rmse_cycles": 38.70470200627498,
+      "n_windows": 1000
+    },
+    "100+": {
+      "mae_cycles": 29.583362810373114,
+      "rmse_cycles": 36.605811861979944,
+      "n_windows": 1644
+    }
+  },
+  "endpoint_per_engine": [
+    {
+      "engine_id": "train:FD001:1",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 4.126913540972319,
+      "endpoint_absolute_error": 4.126913540972319
+    },
+    {
+      "engine_id": "train:FD001:100",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 14.074342002404336,
+      "endpoint_absolute_error": 14.074342002404336
+    },
+    {
+      "engine_id": "train:FD001:14",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 1.5943103006842325,
+      "endpoint_absolute_error": 1.5943103006842325
+    },
+    {
+      "engine_id": "train:FD001:23",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 4.19809934884094,
+      "endpoint_absolute_error": 4.19809934884094
+    },
+    {
+      "engine_id": "train:FD001:30",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 4.95548709673968,
+      "endpoint_absolute_error": 4.95548709673968
+    },
+    {
+      "engine_id": "train:FD001:31",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.7755977901916411,
+      "endpoint_absolute_error": 0.7755977901916411
+    },
+    {
+      "engine_id": "train:FD001:33",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.8492883088971808,
+      "endpoint_absolute_error": 0.8492883088971808
+    },
+    {
+      "engine_id": "train:FD001:38",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.29801714738961943,
+      "endpoint_absolute_error": 0.29801714738961943
+    },
+    {
+      "engine_id": "train:FD001:39",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.0,
+      "endpoint_absolute_error": 0.0
+    },
+    {
+      "engine_id": "train:FD001:42",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 11.907212467851751,
+      "endpoint_absolute_error": 11.907212467851751
+    },
+    {
+      "engine_id": "train:FD001:47",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 1.4485965830087675,
+      "endpoint_absolute_error": 1.4485965830087675
+    },
+    {
+      "engine_id": "train:FD001:58",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.1982729496822127,
+      "endpoint_absolute_error": 0.1982729496822127
+    },
+    {
+      "engine_id": "train:FD001:60",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 2.610740373783709,
+      "endpoint_absolute_error": 2.610740373783709
+    },
+    {
+      "engine_id": "train:FD001:63",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 4.7021384954144985,
+      "endpoint_absolute_error": 4.7021384954144985
+    },
+    {
+      "engine_id": "train:FD001:70",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 2.728523676249113,
+      "endpoint_absolute_error": 2.728523676249113
+    },
+    {
+      "engine_id": "train:FD001:74",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.0,
+      "endpoint_absolute_error": 0.0
+    },
+    {
+      "engine_id": "train:FD001:8",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 3.674674036274568,
+      "endpoint_absolute_error": 3.674674036274568
+    },
+    {
+      "engine_id": "train:FD001:80",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.0,
+      "endpoint_absolute_error": 0.0
+    },
+    {
+      "engine_id": "train:FD001:93",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 0.09619807854895515,
+      "endpoint_absolute_error": 0.09619807854895515
+    },
+    {
+      "engine_id": "train:FD001:94",
+      "endpoint_true_rul": 0,
+      "endpoint_prediction": 1.5081928044620077,
+      "endpoint_absolute_error": 1.5081928044620077
+    }
+  ]
+}

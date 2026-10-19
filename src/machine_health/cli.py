@@ -1,0 +1,54 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+from machine_health.pipeline import ROOT, evaluate_saved, prepare, train
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(prog="machine-health")
+    sub = parser.add_subparsers(dest="command", required=True)
+    p_prepare = sub.add_parser("prepare", help="Acquire NASA archive or validate local FD001 file")
+    p_prepare.add_argument("--data", type=Path, default=ROOT / "data/raw")
+    p_prepare.add_argument("--file", type=Path)
+    p_train = sub.add_parser("train", help="Train constant and gradient-boosted baselines")
+    p_train.add_argument("--data", type=Path, default=ROOT / "data/raw/train_FD001.txt")
+    p_train.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
+    p_eval = sub.add_parser("evaluate-validation", help="Evaluate saved model on held-out engines")
+    p_eval.add_argument("--data", type=Path, default=ROOT / "data/raw/train_FD001.txt")
+    p_eval.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
+    p_eval.add_argument("--split", type=Path, default=ROOT / "reports/fd001_split.json")
+    p_eval.add_argument("--output", type=Path, default=ROOT / "reports/validation_metrics.json")
+    replay = sub.add_parser("replay", help="Generate predictions for all validation engine cycles")
+    replay.add_argument("--data", type=Path, default=ROOT / "data/raw/train_FD001.txt")
+    replay.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
+    replay.add_argument("--split", type=Path, default=ROOT / "reports/fd001_split.json")
+    replay.add_argument("--output", type=Path, default=ROOT / "data/processed/validation_replay.csv")
+    args = parser.parse_args()
+    if args.command == "prepare":
+        path = args.file or prepare(args.data)
+        from machine_health.data import load_fd001
+        print(f"Validated {len(load_fd001(path))} rows from {path}")
+    elif args.command == "train":
+        result = train(args.data, args.artifact)
+        print(f"Saved {args.artifact}; train engines={len(result['train_engines'])}, validation engines={len(result['validation_engines'])}")
+    elif args.command == "evaluate-validation":
+        result = evaluate_saved(args.data, args.artifact, args.split, args.output)
+        print(f"Validation endpoint MAE={result['endpoint']['mae_cycles']:.3f} cycles; report={args.output.with_suffix('.md')}")
+    else:
+        import json
+
+        from machine_health.data import attach_rul, load_fd001
+        from machine_health.features import FEATURES, causal_features
+        from machine_health.model import load_artifact
+        frame = attach_rul(load_fd001(args.data))
+        feat = causal_features(frame)
+        split = json.loads(args.split.read_text())
+        selected = feat.engine_id.isin(split['validation_engines'])
+        artifact = load_artifact(args.artifact)
+        output = frame.loc[selected, ['engine_id', 'unit', 'cycle', 'rul']].copy()
+        output['prediction'] = artifact['model'].predict(feat.loc[selected, FEATURES])
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        output.to_csv(args.output, index=False)
+        print(f"Wrote {len(output)} validation replay rows to {args.output}")
