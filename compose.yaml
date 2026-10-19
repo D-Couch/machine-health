@@ -5,6 +5,7 @@ services:
       - "8501:8501"
     volumes:
       - ./data/raw:/app/data/raw:ro
+      - ./data/processed:/app/data/processed:ro
       - ./artifacts:/app/artifacts:ro
       - ./reports:/app/reports:ro
   api:

@@ -45,6 +45,13 @@ def main() -> None:
     runs = sub.add_parser("list-runs", help="List recorded train/evaluation runs from SQLite")
     runs.add_argument("--database", type=Path, default=ROOT / "data/experiments.sqlite")
     runs.add_argument("--limit", type=int, default=20)
+    temporal = sub.add_parser("train-temporal", help="Train and evaluate the TCN with engine-level calibration")
+    temporal.add_argument("--data", type=Path, default=ROOT / "data/raw/train_FD001.txt")
+    temporal.add_argument("--artifact", type=Path, default=ROOT / "artifacts/fd001.joblib")
+    temporal.add_argument("--split", type=Path, default=ROOT / "reports/fd001_split.json")
+    temporal.add_argument("--checkpoint", type=Path, default=ROOT / "artifacts/fd001_tcn.pt")
+    temporal.add_argument("--output", type=Path, default=ROOT / "reports/temporal_model_v1.json")
+    temporal.add_argument("--replay", type=Path, default=ROOT / "data/processed/temporal_validation_replay.csv")
     args = parser.parse_args()
     if args.command == "prepare":
         path = args.file or prepare(args.data)
@@ -79,6 +86,14 @@ def main() -> None:
     elif args.command == "select-alert-policy":
         result = select_alert_policy(args.data, args.artifact, args.split, args.output)
         print(f"Selected threshold={result['selected_threshold_cycles']} cycles on validation engines")
+    elif args.command == "train-temporal":
+        from machine_health.temporal_pipeline import run_temporal_experiment
+
+        result = run_temporal_experiment(args.data, args.artifact, args.split,
+                                         args.checkpoint, args.output, args.replay)
+        score = result["tcn"]["score"]
+        print(f"TCN validation endpoint MAE={score['endpoint']['mae_cycles']:.3f} cycles; "
+              f"report={args.output.with_suffix('.md')}")
     else:
         result = evaluate_test(args.data, args.artifact, args.output)
         print(f"Official test endpoint MAE={result['primary_model']['mae_cycles']:.3f} cycles; report={args.output.with_suffix('.md')}")

@@ -7,10 +7,12 @@ A reproducible CPU-first predictive-maintenance vertical slice using NASA's simu
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -e '.[dev]'
+.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu 'torch>=2.5,<3'
 .venv/bin/machine-health prepare
 .venv/bin/machine-health train
 .venv/bin/machine-health evaluate-validation
 .venv/bin/machine-health select-alert-policy
+.venv/bin/machine-health train-temporal
 .venv/bin/machine-health replay
 .venv/bin/streamlit run app/streamlit_app.py
 ```
@@ -51,6 +53,14 @@ FastAPI uses the dashboard's saved artifact and shared causal feature builder. I
 Training and evaluation calls append provenance/config/metric rows to the local SQLite index at `data/experiments.sqlite`; inspect it with `.venv/bin/machine-health list-runs`. The database is local-only and ignored by Git.
 
 For a container demo, first prepare data and train locally, then run `podman compose up --build`. The Compose file bind-mounts the local dataset, model artifact, and reports read-only. GitHub Actions runs CPU tests and lint only; it does not acquire NASA data or train a model.
+
+## Temporal model and intervals
+
+`machine-health train-temporal` trains a compact causal TCN from 30-cycle raw sensor histories. It uses 72 original training engines for fitting, 8 disjoint training engines for early stopping, 12 of the existing validation engines for model comparison, and the remaining 8 validation engines for interval calibration. Tree and TCN point metrics use the same 12 model-selection engines. The official test set is not loaded.
+
+The current validation-only comparison is in `reports/temporal_model_v1.md`. On the 12 model-selection engines, TCN window MAE/RMSE is 20.701/28.217 cycles versus 23.653/30.502 for the gradient-boosted baseline. Complete-path endpoint targets are zero by construction, so endpoint metrics there are not operational RUL evidence. Nominal 80% intervals use an engine-block maximum-residual conformal method grouped by *predicted* RUL band; with only 8 calibration engines, intervals are coarse and can be wide. Empirical model-selection endpoint coverage was 12/12 with mean interval width 12.67 cycles. Read [docs/MODEL_CARD.md](docs/MODEL_CARD.md) for the method, results by RUL range, assumptions, and limitations.
+
+The Streamlit dashboard offers the TCN replay and calibrated interval when temporal experiment outputs exist.
 
 ## Development checks
 

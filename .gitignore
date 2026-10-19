@@ -9,6 +9,7 @@ dist/
 data/raw/*
 data/processed/*
 artifacts/*.joblib
+artifacts/*.pt
 artifacts/*.json
 data/*.sqlite
 data/*.sqlite-*
