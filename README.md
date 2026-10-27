@@ -1,6 +1,6 @@
-# Machine Health — FD001 RUL baseline
+# Machine Health — predictive maintenance benchmark and planning prototype
 
-A reproducible CPU-first predictive-maintenance vertical slice using NASA's simulated C-MAPSS turbofan histories. The app replays held-out, complete validation engines and displays the withheld RUL as retrospective evaluation information. It is not live telemetry or maintenance advice.
+A reproducible CPU-first predictive-maintenance project with two linked goals: rigorous ML evaluation on NASA's simulated C-MAPSS turbofan histories, and a prototype for a reliability or maintenance planner reviewing a simulated validation fleet. The workflow prioritizes engines from prediction-only snapshots, then lets a reviewer inspect sensor and model evidence. It is designed to focus limited review attention with traceable evidence, but does not measure that benefit. It is not live telemetry, a real-fleet system, or maintenance advice.
 
 ## Quick start
 
@@ -46,6 +46,14 @@ The protocol in [docs/EVALUATION_PROTOCOL.md](docs/EVALUATION_PROTOCOL.md) was c
 
 The threshold is selected only on 20 held-out complete validation engines. The policy requires 20 cycles of history and three consecutive predictions at or below threshold. It targets an actionable 30-cycle horizon, selects maximum timely detection subject to at most a 10% early false-alarm-engine rate, and counts first persistent alerts after RUL reaches zero as misses. On this split, selected threshold is **20 cycles**, with 20/20 timely detections, 0/20 early false alarms, 0 missed failures, and mean timely lead 11.75 cycles. This is validation-only retrospective lifecycle evidence; the truncated official test set is not used for full-lifecycle alert claims. Full threshold comparison is in `reports/validation_alert_policy.md`.
 
+## Maintenance planning prototype
+
+The Fleet review view presents the 20 held-out validation engines (or the 12 disjoint TCN model-selection engines when TCN replay artifacts are present) at a shared observed cycle. The default snapshot is cycle 120, which is available for all 20 original validation engines; the selector permits other common observed cycles. All cycle values refer to simulated benchmark cycles, not hours or field operating time.
+
+Queue status and ordering use only model predictions through the selected snapshot, the explicit threshold/persistence settings, and the review horizon. The queue builder accepts no RUL labels or engine metadata. Retrospective actual RUL and prediction error are separated in the asset detail. Threshold, persistence, and horizon controls change the queue scenario and its retrospective validation scoring only; they do not retrain models or modify saved validation results. Review workload counts unique benchmark engines with a first persistent alert and is not a staffing-capacity estimate. The alert scenario uses one first alert per complete validation engine: timely means actual RUL 1 through the selected horizon, early false alarm means actual RUL above it, and no alert or alert only at failure counts as missed. Repeated exploration can overfit the validation cohort. The evaluation tab's saved alert curve is an exploratory retrospective comparison on the same validation cohort used to select the documented threshold, not independent confirmation or an operational optimum. The frozen official test sensors and labels are not loaded by this workflow.
+
+This demonstrates a maintenance-planning interaction on benchmark data. It does not establish economic benefit, real-fleet performance, or suitability for aircraft or other operational maintenance decisions.
+
 ## API, experiment index, and container
 
 FastAPI uses the dashboard's saved artifact and shared causal feature builder. It validates strict cycle order and rejects extra fields such as RUL labels or engine IDs. See [docs/API.md](docs/API.md). Launch with `.venv/bin/uvicorn machine_health.api:app --host 127.0.0.1 --port 8000`.
@@ -56,14 +64,15 @@ For a container demo, first prepare data and train locally, then run `podman com
 
 ## Visual walkthrough
 
-Launch `.venv/bin/streamlit run app/streamlit_app.py` for a four-part project tour:
+Launch `.venv/bin/streamlit run app/streamlit_app.py` for the five-part project experience:
 
+- **Fleet review:** prediction-ranked validation queue at a common observation cycle, scenario controls, and an asset evidence view through the selected snapshot. Withheld labels are isolated in a retrospective evaluation expander.
 - **Project overview:** an engine-level partition diagram, project summary, and frozen test result.
 - **Engine replay:** scrub a validation engine by cycle, inspect sensor traces, predictions, and (for the TCN) its interval band. Validation truth is labeled as retrospective evaluation data.
 - **Evaluation evidence:** per-engine official endpoint errors, RUL-band breakdowns, matched validation model comparison, interval coverage/width, and alert tradeoffs.
 - **Methods & limitations:** data flow, model inputs, split design, interval method, and benchmark caveats.
 
-The overview and evidence panels use the small committed JSON reports and work without the ignored NASA data or model artifacts. The replay panel needs the local FD001 training file and corresponding trained artifacts. Every chart identifies its split and aggregation to keep unlike validation scores separate from frozen test scores.
+The overview and evidence panels use the small committed JSON reports and work without the ignored NASA data or model artifacts. Fleet review and replay need the local FD001 training file and corresponding trained artifacts. Every chart identifies its split and aggregation to keep unlike validation scores separate from frozen test scores.
 
 ## Temporal model and intervals
 

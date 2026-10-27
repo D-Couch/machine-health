@@ -13,10 +13,11 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from machine_health.alert_policy import _first_persistent_alert
-from machine_health.data import attach_rul, load_fd001
+from machine_health.alert_policy import _first_persistent_alert, score_validation_policy_scenario
+from machine_health.data import attach_rul, load_fd001, sha256
 from machine_health.features import FEATURES, causal_features
 from machine_health.model import load_artifact
+from machine_health.planning import build_validation_review_queue
 
 REPORTS = ROOT / "reports"
 DATA = ROOT / "data/raw/train_FD001.txt"
@@ -88,6 +89,23 @@ def load_tree_artifact(path: str) -> dict:
     return load_artifact(Path(path))
 
 
+@st.cache_data(show_spinner="Scoring held-out validation histories…")
+def load_tree_predictions(data_path: str, artifact_path: str,
+                         engine_ids: tuple[str, ...]) -> pd.DataFrame:
+    _, features = load_history(data_path)
+    selected = features.loc[features.engine_id.isin(engine_ids)]
+    artifact = load_tree_artifact(artifact_path)
+    predictions = np.maximum(0, artifact["model"].predict(selected[FEATURES]))
+    result = selected[["engine_id", "cycle"]].copy()
+    result["prediction"] = predictions
+    return result.reset_index(drop=True)
+
+
+@st.cache_data(show_spinner=False)
+def load_temporal_predictions(path: str) -> pd.DataFrame:
+    return pd.read_csv(path)
+
+
 def render_header(test_report: dict | None) -> None:
     if test_report:
         mae = test_report["primary_model"]["mae_cycles"]
@@ -99,11 +117,232 @@ def render_header(test_report: dict | None) -> None:
         stat = "<div class=\"hero-stat\"><span>NASA C-MAPSS · FD001</span><strong>RUL</strong><small>Remaining useful life, measured in cycles</small></div>"
     st.markdown(f"""
     <div class="hero"><div class="hero-kicker">Machine health · predictive maintenance case study</div>
-      <div class="hero-grid"><div class="hero-copy"><h1>From sensor history<br>to remaining-life estimates.</h1>
-      <p>An end-to-end ML engineering project on NASA’s simulated turbofan fleet: engine-safe splits, causal features, temporal models, calibrated uncertainty, and an interactive replay.</p></div>
+      <div class="hero-grid"><div class="hero-copy"><h1>From sensor history<br>to inspection priorities.</h1>
+      <p>For a reliability or maintenance planner: review a simulated fleet, inspect why an engine is prioritized, and explore alert-policy tradeoffs alongside reproducible ML evaluation. The prototype is designed to focus limited review attention with traceable evidence; that benefit is not measured here.</p></div>
       {stat}</div></div>
     """, unsafe_allow_html=True)
     st.markdown("<div class='trust-note'><b>Research demonstration.</b> C-MAPSS is simulated benchmark data. These estimates are not validated maintenance recommendations. Official test results are frozen and are not used for model selection.</div>", unsafe_allow_html=True)
+
+
+def render_fleet_review(split: dict, temporal: dict | None, alert: dict | None) -> None:
+    st.markdown('<div class="section-kicker">Maintenance planning prototype</div>',
+                unsafe_allow_html=True)
+    st.header("Validation fleet review")
+    st.caption("For a reliability or maintenance planner deciding which simulated assets to inspect, monitor, defer, or dismiss. Review a cohort at one shared observation cycle, then inspect an engine's evidence through that point.")
+    st.info("Benchmark simulation only · Review, Watch, and Routine are prototype triage states, not maintenance recommendations. Rankings use predictions and selected policy settings. Actual remaining life is kept in a separate retrospective evaluation panel.")
+
+    if not (DATA.exists() and ARTIFACT.exists() and SPLIT.exists()):
+        st.warning("Fleet review needs the local NASA FD001 training file and baseline artifact. The committed overview and evaluation reports remain available without them.")
+        st.code(".venv/bin/machine-health prepare\n.venv/bin/machine-health train\n.venv/bin/machine-health evaluate-validation")
+        return
+
+    model_options = ["Gradient-boosted baseline"]
+    temporal_split = None
+    if TEMPORAL_REPLAY.exists() and TEMPORAL_SPLIT.exists():
+        temporal_split = json.loads(TEMPORAL_SPLIT.read_text())
+        model_options.append("Temporal convolutional network")
+    model_name = st.selectbox("Prediction model", model_options, key="fleet_model")
+    if model_name == "Temporal convolutional network" and temporal_split:
+        cohort = tuple(temporal_split["model_selection_engines"])
+        predictions = load_temporal_predictions(str(TEMPORAL_REPLAY))
+        # Keep only inference outputs. The replay file's actual_rul column is reserved
+        # for the explicitly retrospective asset-evidence panel below.
+        predictions = predictions.loc[
+            predictions.engine_id.isin(cohort), ["engine_id", "cycle", "prediction", "lower", "upper"]
+        ].copy()
+        model_label = "TCN · 12 model-selection engines"
+    else:
+        cohort = tuple(split["validation_engines"])
+        predictions = load_tree_predictions(str(DATA), str(ARTIFACT), cohort)
+        model_label = "Gradient boosting · 20 validation engines"
+    if model_name == "Temporal convolutional network":
+        artifact_digest = temporal.get("tcn_artifact_sha256", "unavailable") if temporal else "unavailable"
+    else:
+        artifact_digest = sha256(ARTIFACT)
+    st.caption(f"Prediction artifact SHA-256: `{artifact_digest}` · validation split manifest: `{SPLIT.name}`")
+
+    max_common_cycle = int(predictions.groupby("engine_id").cycle.max().min())
+    min_common_cycle = int(predictions.groupby("engine_id").cycle.min().max())
+    if min_common_cycle > max_common_cycle:
+        st.error("The selected validation cohort has no shared observation-cycle range.")
+        return
+
+    policy = alert["policy"] if alert else {
+        "persistence_cycles": 3, "minimum_history_cycles": 20,
+    }
+    controls = st.columns(4)
+    default_snapshot = min(120, max_common_cycle)
+    snapshot_cycle = controls[0].slider(
+        "Fleet snapshot · cycle", min_common_cycle, max_common_cycle, default_snapshot,
+        key="fleet_snapshot_cycle",
+    )
+    threshold = controls[1].slider(
+        "Alert threshold · cycles", 5, 100,
+        int(alert["selected_threshold_cycles"] if alert else 20), step=5,
+        key="fleet_threshold",
+    )
+    persistence = controls[2].slider(
+        "Persistence · cycles", 1, 6,
+        int(policy["persistence_cycles"]), key="fleet_persistence",
+    )
+    horizon = controls[3].slider(
+        "Review horizon · cycles", 10, 60,
+        int(policy.get("actionable_horizon_cycles", 30)), step=5,
+        key="fleet_horizon",
+    )
+
+    try:
+        queue = build_validation_review_queue(
+            predictions, cohort, snapshot_cycle=snapshot_cycle,
+            threshold_cycles=threshold, persistence_cycles=persistence,
+            minimum_history_cycles=int(policy["minimum_history_cycles"]),
+            review_horizon_cycles=horizon,
+        )
+    except ValueError as error:
+        st.error(f"Unable to build this as-of queue: {error}")
+        return
+
+    review_count = int((queue.status == "Review").sum())
+    watch_count = int((queue.status == "Watch").sum())
+    routine_count = int((queue.status == "Routine").sum())
+    a, b, c, d = st.columns(4)
+    a.metric("Validation cohort", f"{len(queue)} engines", help=model_label)
+    b.metric("Review", review_count, help="Persistent alert threshold was met by this snapshot.")
+    c.metric("Watch", watch_count, help="Predicted RUL is inside the selected review horizon without a persistent alert.")
+    d.metric("Routine", routine_count, help="Predicted RUL is outside the selected review horizon.")
+    st.caption(
+        f"Model: {model_label}. Common-age snapshot: cycle {snapshot_cycle}. "
+        f"Threshold {threshold} cycles for {persistence} consecutive predictions after "
+        f"{policy['minimum_history_cycles']} history cycles; review horizon {horizon} cycles. "
+        "These controls create a validation what-if scenario; they do not change saved policy results or model artifacts."
+    )
+
+    display_columns = {
+        "rank": "Rank", "status": "Queue status", "engine_id": "Benchmark engine",
+        "predicted_rul_cycles": "Predicted RUL (cycles)",
+        "lower_cycles": "Interval lower (cycles)", "upper_cycles": "Interval upper (cycles)",
+        "first_alert_cycle": "First alert by snapshot",
+    }
+    visible_columns = [column for column in display_columns if column in queue]
+    st.dataframe(
+        queue[visible_columns].rename(columns=display_columns).round(1),
+        hide_index=True, width="stretch",
+    )
+    st.caption("Queue ranks are computed only from model predictions, the as-of prediction history, and the controls above. No actual RUL, run-to-failure endpoint, or official-test data is passed into queue ranking.")
+
+    st.subheader("Retrospective policy scenario on the selected validation cohort")
+    st.caption("The following outcomes use the complete held-out validation lifecycles only to score this what-if policy. Repeated exploration can overfit these 20 engines; these figures are not independent confirmation and do not select or update a saved policy.")
+    frame, _ = load_history(str(DATA))
+    validation_outcomes = frame.loc[
+        frame.engine_id.isin(cohort), ["engine_id", "cycle", "rul"]
+    ].rename(columns={"rul": "actual_rul"})
+    scenario = score_validation_policy_scenario(
+        predictions[["engine_id", "cycle", "prediction"]].copy(),
+        validation_outcomes, list(cohort), threshold_cycles=threshold,
+        persistence_cycles=persistence,
+        minimum_history_cycles=int(policy["minimum_history_cycles"]),
+        actionable_horizon_cycles=horizon,
+    )
+    st.caption(
+        f"Denominator: {scenario['validation_engines']} complete validation engines. "
+        "Each engine contributes at most its first persistent alert. Timely means actual "
+        "RUL 1 through the selected horizon; early false alarm means actual RUL above "
+        "that horizon; no alert or alert only at failure counts as missed. Alert count "
+        "is a benchmark engine count, not a staffing-capacity estimate."
+    )
+    scenario_cols = st.columns(5)
+    scenario_cols[0].metric("Persistent alerts · engine workload",
+                            f"{scenario['alerted_engines']}/{scenario['validation_engines']}")
+    scenario_cols[1].metric("Timely detections",
+                            f"{scenario['timely_detection_engines']}/{scenario['validation_engines']}")
+    scenario_cols[2].metric("Early false alarms",
+                            f"{scenario['early_false_alarm_engines']}/{scenario['validation_engines']}")
+    scenario_cols[3].metric("Missed failures",
+                            f"{scenario['missed_failures']}/{scenario['validation_engines']}")
+    mean_lead = scenario["mean_timely_lead_time_cycles"]
+    scenario_cols[4].metric("Mean timely lead",
+                            "—" if mean_lead is None else f"{mean_lead:.1f} cycles")
+    with st.expander("Per-engine retrospective event scoring"):
+        st.dataframe(pd.DataFrame(scenario["events"]).rename(columns={
+            "engine_id": "Benchmark engine", "category": "Retrospective category",
+            "lead_time_cycles": "Lead time (cycles)", "alert_cycle": "First alert cycle",
+        }), hide_index=True, width="stretch")
+
+    selected_engine = st.selectbox(
+        "Inspect a validation engine", queue.engine_id.tolist(),
+        format_func=lambda engine_id: (
+            f"#{int(queue.loc[queue.engine_id == engine_id, 'rank'].iloc[0])} · "
+            f"{queue.loc[queue.engine_id == engine_id, 'status'].iloc[0]} · {engine_id}"
+        ), key="fleet_selected_engine",
+    )
+    engine_predictions = predictions.loc[
+        (predictions.engine_id == selected_engine) & (predictions.cycle <= snapshot_cycle)
+    ].sort_values("cycle")
+    current = queue.loc[queue.engine_id == selected_engine].iloc[0]
+    metric_cols = st.columns(4)
+    metric_cols[0].metric("Queue status", current.status)
+    metric_cols[1].metric("Predicted RUL", f"{current.predicted_rul_cycles:.1f} cycles")
+    metric_cols[2].metric(
+        "Persistent alert",
+        "Recorded" if current.alert_recorded else "Not yet recorded",
+        help=("First persistent threshold crossing through snapshot. A recorded alert is latched in this prototype."
+              if current.alert_recorded else "No persistent threshold crossing through the selected snapshot."),
+    )
+    interval_width = (
+        current.upper_cycles - current.lower_cycles
+        if "lower_cycles" in current.index and pd.notna(current.lower_cycles)
+        else None
+    )
+    metric_cols[3].metric(
+        "Interval width" if interval_width is not None else "Model output",
+        f"{interval_width:.1f} cycles" if interval_width is not None else "Point estimate",
+    )
+
+    estimate = go.Figure()
+    if {"lower", "upper"}.issubset(engine_predictions.columns):
+        estimate.add_trace(go.Scatter(
+            x=engine_predictions.cycle, y=engine_predictions.lower, mode="lines",
+            line={"width": 0}, showlegend=False, hoverinfo="skip",
+        ))
+        estimate.add_trace(go.Scatter(
+            x=engine_predictions.cycle, y=engine_predictions.upper, mode="lines",
+            line={"width": 0}, fill="tonexty", fillcolor="rgba(40,100,220,.15)",
+            name="Nominal 80% interval",
+        ))
+    estimate.add_trace(go.Scatter(
+        x=engine_predictions.cycle, y=engine_predictions.prediction, mode="lines",
+        name="Predicted RUL", line={"color": COLORS["blue"], "width": 3},
+    ))
+    estimate.add_hline(y=threshold, line_dash="dot", line_color=COLORS["red"],
+                       annotation_text=f"Scenario threshold · {threshold} cycles")
+    estimate.add_hline(y=horizon, line_dash="dash", line_color=COLORS["orange"],
+                       annotation_text=f"Review horizon · {horizon} cycles")
+    estimate.add_vline(x=snapshot_cycle, line_dash="dot", line_color=COLORS["navy"],
+                       annotation_text="Planning snapshot")
+    estimate.update_layout(xaxis_title="Observed cycle", yaxis_title="Predicted RUL (cycles)",
+                           hovermode="x unified")
+    chart_layout(estimate, height=390, title=f"Prediction evidence through cycle {snapshot_cycle} · {selected_engine}")
+    st.plotly_chart(estimate, width="stretch", key="fleet_prediction_evidence")
+
+    observed = frame.loc[
+        (frame.engine_id == selected_engine) & (frame.cycle <= snapshot_cycle)
+    ]
+    sensor_channels = st.multiselect(
+        "Observed sensor channels through snapshot",
+        [f"sensor_{i}" for i in range(1, 22)],
+        default=["sensor_2", "sensor_3", "sensor_4"], key="fleet_sensor_channels",
+    )
+    if sensor_channels:
+        sensor_fig = px.line(observed, x="cycle", y=sensor_channels,
+                             color_discrete_sequence=[COLORS["blue"], COLORS["teal"], COLORS["orange"]])
+        chart_layout(sensor_fig, height=330, title="Observed sensor history available at the selected snapshot")
+        st.plotly_chart(sensor_fig, width="stretch", key="fleet_sensor_evidence")
+
+    with st.expander("Retrospective validation outcome · evaluation only"):
+        st.warning("This held-out full trajectory's later outcome is shown only to evaluate the snapshot estimate. It did not affect queue ranking or the displayed predictions.")
+        actual = float(observed.loc[observed.cycle == snapshot_cycle, "rul"].iloc[0])
+        st.metric("Actual RUL at snapshot · validation label", f"{actual:.0f} cycles")
+        st.metric("Absolute prediction error · retrospective", f"{abs(actual - current.predicted_rul_cycles):.1f} cycles")
 
 
 def render_overview(validation: dict | None, temporal: dict | None,
@@ -369,7 +608,7 @@ def render_evaluation(validation: dict | None, temporal: dict | None,
 
     if alert:
         st.subheader("04 · Validation alert policy · 20 complete engines")
-        st.caption("Selected for the gradient-boosted model on full validation lifecycles; it does not establish full-lifecycle performance on truncated test engines.")
+        st.caption("Retrospective candidate analysis on the same 20 full validation lifecycles used to select the recorded tree threshold. The curve is exploratory evidence, not untouched confirmation or an operational optimum; it does not establish lifecycle performance on truncated test engines.")
         selected = alert["selected_validation_result"]
         a, b, c, d = st.columns(4)
         a.metric("Selected threshold", f"{alert['selected_threshold_cycles']} cycles")
@@ -469,10 +708,15 @@ test_report = read_report("official_test_v1.json")
 render_header(test_report)
 st.sidebar.markdown("### MACHINE HEALTH")
 st.sidebar.caption("NASA C-MAPSS · FD001")
-st.sidebar.markdown("**Project status**  \nMilestones 1–3 · CPU-first")
+st.sidebar.markdown("**Project status**  \nMilestone 4 in progress · CPU-first")
 st.sidebar.caption("All RUL estimates are measured in cycles.")
-overview_tab, replay_tab, evidence_tab, methods_tab = st.tabs(
-    ["Project overview", "Engine replay", "Evaluation evidence", "Methods & limitations"])
+fleet_tab, overview_tab, replay_tab, evidence_tab, methods_tab = st.tabs(
+    ["Fleet review", "Project overview", "Engine replay", "Evaluation evidence", "Methods & limitations"])
+with fleet_tab:
+    if SPLIT.exists():
+        render_fleet_review(json.loads(SPLIT.read_text()), temporal_report, alert_report)
+    else:
+        st.info("The split manifest is missing. Run the project training workflow to enable the validation fleet prototype.")
 with overview_tab:
     render_overview(validation, temporal_report, alert_report, test_report)
 with replay_tab:
