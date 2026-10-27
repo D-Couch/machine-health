@@ -1,0 +1,864 @@
+{
+  "dataset": "NASA C-MAPSS FD001 training trajectories; validation only",
+  "target": "raw uncapped RUL cycles",
+  "split_manifest": "reports/temporal_split.json",
+  "split_manifest_sha256": "dcb87d5e447fec5912dd4a688f54d9fed0bb68c1062f859f53ea45931365b1b3",
+  "data_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+  "classic_artifact_sha256": "2fa1a538304661af10d98206d72b16dd7f79717fb7e03d1feb06e194c2476138",
+  "tcn_artifact": "artifacts/fd001_tcn_gpu.pt",
+  "tcn_artifact_sha256": "e3b6246c57b54c9800a3169b9f57d52600035945a0b724957d1a3315bcacf050",
+  "code_revision": "179a9b0ab965bc09061b8e6cdb448b6f0339bf49",
+  "code_dirty": true,
+  "dirty_paths": [
+    "START_HERE.md",
+    "docs/STATUS.md",
+    "reports/temporal_model_gpu_v1.json",
+    "reports/temporal_model_gpu_v1.md"
+  ],
+  "source_sha256": {
+    "src/machine_health/temporal.py": "991b4c8c44f095a1c7e3ac6944998aa4264586d766af4053c2feea66942ec568",
+    "src/machine_health/temporal_pipeline.py": "d9ed8c927128c145ec72568d478ea644d3c481e6840d16023bf1ce1f74d5f4dd",
+    "src/machine_health/features.py": "481a4a7d73a8c17ab1ecf0628f84c892d13c20ea68dfb265888ff802bb3b7638",
+    "src/machine_health/model.py": "4dc84c7d707921eb8c2ecd1ff100ef5954bf73df5b8183b4304125d6a42d690a",
+    "src/machine_health/data.py": "bd6a45ea449f345bfb86039304c525ba1217c69d9fd7b7202310289dea036845",
+    "src/machine_health/pipeline.py": "69b17df4ebfcae7668a7f0af48694e095cdf91d1543767463b7bbfb1d6459b33",
+    "src/machine_health/cli.py": "92712e24117e60bcb10c78701e37ac617eee4d5364e45ebf7d506afcfc0cfea2",
+    "app/streamlit_app.py": "bdc678bb28ca89734d6f2cac5b80c0bbfd5e1b7661dd319e95099aad155e3ad3"
+  },
+  "python": "3.14.8",
+  "platform": "Linux-7.2.9-ogc3.1.fc44.x86_64-x86_64-with-glibc2.43",
+  "cpu_threads": 8,
+  "device": "cuda",
+  "cuda_available": true,
+  "cuda_runtime": "13.0",
+  "gpu_name": "NVIDIA GeForce RTX 4090",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "scikit_learn": "1.9.1",
+  "torch": "2.14.1+cu130",
+  "seed": 31415,
+  "tcn": {
+    "architecture": "4 residual causal Conv1d blocks, kernel 3, dilations 1/2/4/8, 32 channels",
+    "history_cycles": 30,
+    "input_features": [
+      "cycle",
+      "setting_1",
+      "setting_2",
+      "setting_3",
+      "sensor_1",
+      "sensor_2",
+      "sensor_3",
+      "sensor_4",
+      "sensor_5",
+      "sensor_6",
+      "sensor_7",
+      "sensor_8",
+      "sensor_9",
+      "sensor_10",
+      "sensor_11",
+      "sensor_12",
+      "sensor_13",
+      "sensor_14",
+      "sensor_15",
+      "sensor_16",
+      "sensor_17",
+      "sensor_18",
+      "sensor_19",
+      "sensor_20",
+      "sensor_21"
+    ],
+    "history_note": "TCN sees 30 raw cycles; tree baseline uses causal trailing summaries through 20 cycles. Both include current cycle, operating settings, and sensors.",
+    "early_stopping": {
+      "best_epoch": 5,
+      "early_stop_mae_cycles": 25.628416061401367,
+      "epochs_run": 13,
+      "history": [
+        {
+          "epoch": 1,
+          "train_smooth_l1_scaled": 0.18525130463143188,
+          "early_stop_mae_cycles": 29.734045028686523
+        },
+        {
+          "epoch": 2,
+          "train_smooth_l1_scaled": 0.12679604527850946,
+          "early_stop_mae_cycles": 27.19753646850586
+        },
+        {
+          "epoch": 3,
+          "train_smooth_l1_scaled": 0.11568669937551021,
+          "early_stop_mae_cycles": 27.13250732421875
+        },
+        {
+          "epoch": 4,
+          "train_smooth_l1_scaled": 0.1103582490235567,
+          "early_stop_mae_cycles": 26.056875228881836
+        },
+        {
+          "epoch": 5,
+          "train_smooth_l1_scaled": 0.10516282071669897,
+          "early_stop_mae_cycles": 25.628416061401367
+        },
+        {
+          "epoch": 6,
+          "train_smooth_l1_scaled": 0.09903330517311891,
+          "early_stop_mae_cycles": 27.112018585205078
+        },
+        {
+          "epoch": 7,
+          "train_smooth_l1_scaled": 0.09718878840406736,
+          "early_stop_mae_cycles": 26.983722686767578
+        },
+        {
+          "epoch": 8,
+          "train_smooth_l1_scaled": 0.09234201045085987,
+          "early_stop_mae_cycles": 28.40592384338379
+        },
+        {
+          "epoch": 9,
+          "train_smooth_l1_scaled": 0.08803499278922876,
+          "early_stop_mae_cycles": 25.89511489868164
+        },
+        {
+          "epoch": 10,
+          "train_smooth_l1_scaled": 0.08381444104015827,
+          "early_stop_mae_cycles": 25.982831954956055
+        },
+        {
+          "epoch": 11,
+          "train_smooth_l1_scaled": 0.08000708979864915,
+          "early_stop_mae_cycles": 27.651941299438477
+        },
+        {
+          "epoch": 12,
+          "train_smooth_l1_scaled": 0.07074746321886778,
+          "early_stop_mae_cycles": 27.481098175048828
+        },
+        {
+          "epoch": 13,
+          "train_smooth_l1_scaled": 0.06371264718472958,
+          "early_stop_mae_cycles": 28.13431739807129
+        }
+      ],
+      "fit_engines": [
+        "train:FD001:10",
+        "train:FD001:11",
+        "train:FD001:12",
+        "train:FD001:13",
+        "train:FD001:15",
+        "train:FD001:16",
+        "train:FD001:17",
+        "train:FD001:18",
+        "train:FD001:19",
+        "train:FD001:2",
+        "train:FD001:20",
+        "train:FD001:21",
+        "train:FD001:22",
+        "train:FD001:24",
+        "train:FD001:25",
+        "train:FD001:26",
+        "train:FD001:27",
+        "train:FD001:28",
+        "train:FD001:29",
+        "train:FD001:3",
+        "train:FD001:32",
+        "train:FD001:34",
+        "train:FD001:35",
+        "train:FD001:37",
+        "train:FD001:4",
+        "train:FD001:40",
+        "train:FD001:41",
+        "train:FD001:44",
+        "train:FD001:45",
+        "train:FD001:46",
+        "train:FD001:49",
+        "train:FD001:5",
+        "train:FD001:50",
+        "train:FD001:51",
+        "train:FD001:52",
+        "train:FD001:53",
+        "train:FD001:54",
+        "train:FD001:55",
+        "train:FD001:57",
+        "train:FD001:59",
+        "train:FD001:61",
+        "train:FD001:62",
+        "train:FD001:65",
+        "train:FD001:66",
+        "train:FD001:67",
+        "train:FD001:68",
+        "train:FD001:69",
+        "train:FD001:7",
+        "train:FD001:71",
+        "train:FD001:72",
+        "train:FD001:73",
+        "train:FD001:75",
+        "train:FD001:76",
+        "train:FD001:77",
+        "train:FD001:78",
+        "train:FD001:79",
+        "train:FD001:81",
+        "train:FD001:82",
+        "train:FD001:83",
+        "train:FD001:85",
+        "train:FD001:86",
+        "train:FD001:87",
+        "train:FD001:89",
+        "train:FD001:9",
+        "train:FD001:90",
+        "train:FD001:91",
+        "train:FD001:92",
+        "train:FD001:95",
+        "train:FD001:96",
+        "train:FD001:97",
+        "train:FD001:98",
+        "train:FD001:99"
+      ],
+      "early_stopping_engines": [
+        "train:FD001:36",
+        "train:FD001:43",
+        "train:FD001:48",
+        "train:FD001:56",
+        "train:FD001:6",
+        "train:FD001:64",
+        "train:FD001:84",
+        "train:FD001:88"
+      ]
+    },
+    "score": {
+      "windows": {
+        "mae_cycles": 21.901681900024414,
+        "rmse_cycles": 28.527754269691034
+      },
+      "endpoint": {
+        "mae_cycles": 0.915154755115509,
+        "rmse_cycles": 1.899845056741213,
+        "engines": 12,
+        "per_engine": [
+          {
+            "engine_id": "train:FD001:39",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:8",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:93",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:23",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:60",
+            "actual_rul": 0,
+            "prediction": 2.7880401611328125,
+            "absolute_error": 2.7880401611328125
+          },
+          {
+            "engine_id": "train:FD001:63",
+            "actual_rul": 0,
+            "prediction": 3.1043243408203125,
+            "absolute_error": 3.1043243408203125
+          },
+          {
+            "engine_id": "train:FD001:14",
+            "actual_rul": 0,
+            "prediction": 5.0894927978515625,
+            "absolute_error": 5.0894927978515625
+          },
+          {
+            "engine_id": "train:FD001:80",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:1",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:38",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:33",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:31",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          }
+        ]
+      },
+      "by_actual_rul_band": {
+        "0-19": {
+          "mae_cycles": 4.777117729187012,
+          "rmse_cycles": 6.461863219655091,
+          "cycles": 240,
+          "engines": 12
+        },
+        "20-49": {
+          "mae_cycles": 10.693167686462402,
+          "rmse_cycles": 14.519380442955052,
+          "cycles": 360,
+          "engines": 12
+        },
+        "50-99": {
+          "mae_cycles": 25.238618850708008,
+          "rmse_cycles": 31.55165442528579,
+          "cycles": 600,
+          "engines": 12
+        },
+        "100+": {
+          "mae_cycles": 28.49266815185547,
+          "rmse_cycles": 33.59493820573086,
+          "cycles": 932,
+          "engines": 12
+        }
+      },
+      "prediction_intervals": {
+        "nominal_coverage": 0.8,
+        "by_actual_rul_band": {
+          "0-19": {
+            "engines": 12,
+            "engine_band_simultaneous_coverage": 1.0,
+            "mean_engine_cycle_coverage": 1.0,
+            "mean_width_cycles": 31.574613189697263,
+            "engine_details": [
+              {
+                "engine_id": "train:FD001:1",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 32.3483081817627,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:14",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 29.29241943359375,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:23",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 30.498188018798828,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:31",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 27.506746292114258,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:33",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 37.00478515625,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:38",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 26.213509368896485,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:39",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 38.10357856750488,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:60",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 28.51213264465332,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:63",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 30.248662567138673,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:8",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 28.532407760620117,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:80",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 28.00264663696289,
+                "cycles": 20
+              },
+              {
+                "engine_id": "train:FD001:93",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 42.63197364807129,
+                "cycles": 20
+              }
+            ]
+          },
+          "20-49": {
+            "engines": 12,
+            "engine_band_simultaneous_coverage": 1.0,
+            "mean_engine_cycle_coverage": 1.0,
+            "mean_width_cycles": 80.96082843144735,
+            "engine_details": [
+              {
+                "engine_id": "train:FD001:1",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 77.28501675923665,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:14",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 73.12204653422037,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:23",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 81.22215105692545,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:31",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 72.64535420735677,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:33",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 83.21668395996093,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:38",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 67.44021593729654,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:39",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 110.1342374165853,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:60",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 75.625084177653,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:63",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 77.58914299011231,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:8",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 102.51773440043131,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:80",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 69.90630251566569,
+                "cycles": 30
+              },
+              {
+                "engine_id": "train:FD001:93",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 80.82597122192382,
+                "cycles": 30
+              }
+            ]
+          },
+          "50-99": {
+            "engines": 12,
+            "engine_band_simultaneous_coverage": 1.0,
+            "mean_engine_cycle_coverage": 1.0,
+            "mean_width_cycles": 141.72164824167885,
+            "engine_details": [
+              {
+                "engine_id": "train:FD001:1",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 144.55390716552733,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:14",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 127.78908180236816,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:23",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 145.34469718933104,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:31",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 143.93702644348144,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:33",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 142.8088284301758,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:38",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 124.84611122131348,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:39",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 162.19345581054688,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:60",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 141.24561004638673,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:63",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 134.75061889648438,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:8",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 149.16140014648437,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:80",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 136.6052490234375,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:93",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 147.42379272460937,
+                "cycles": 50
+              }
+            ]
+          },
+          "100+": {
+            "engines": 12,
+            "engine_band_simultaneous_coverage": 0.9166666666666666,
+            "mean_engine_cycle_coverage": 0.9910714285714285,
+            "mean_width_cycles": 165.58757143430427,
+            "engine_details": [
+              {
+                "engine_id": "train:FD001:1",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 92
+              },
+              {
+                "engine_id": "train:FD001:14",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 80
+              },
+              {
+                "engine_id": "train:FD001:23",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 68
+              },
+              {
+                "engine_id": "train:FD001:31",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 134
+              },
+              {
+                "engine_id": "train:FD001:33",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 100
+              },
+              {
+                "engine_id": "train:FD001:38",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.2065410208195,
+                "cycles": 94
+              },
+              {
+                "engine_id": "train:FD001:39",
+                "all_cycles_covered": false,
+                "coverage_fraction": 0.8928571428571429,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 28
+              },
+              {
+                "engine_id": "train:FD001:60",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 72
+              },
+              {
+                "engine_id": "train:FD001:63",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 74
+              },
+              {
+                "engine_id": "train:FD001:8",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 50
+              },
+              {
+                "engine_id": "train:FD001:80",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.15760964786304,
+                "cycles": 85
+              },
+              {
+                "engine_id": "train:FD001:93",
+                "all_cycles_covered": true,
+                "coverage_fraction": 1.0,
+                "mean_width_cycles": 165.66867065429688,
+                "cycles": 55
+              }
+            ]
+          }
+        },
+        "endpoint": {
+          "engines": 12,
+          "coverage": 1.0,
+          "mean_width_cycles": 14.92715581258138,
+          "mae_cycles": 0.915154755115509
+        }
+      }
+    }
+  },
+  "hist_gradient_boosting": {
+    "artifact": "/var/home/dylan/src/machine-health/artifacts/fd001.joblib",
+    "score": {
+      "windows": {
+        "mae_cycles": 23.652633979448336,
+        "rmse_cycles": 30.502470784510475
+      },
+      "endpoint": {
+        "mae_cycles": 1.9104981184164715,
+        "rmse_cycles": 2.5988377323452254,
+        "engines": 12,
+        "per_engine": [
+          {
+            "engine_id": "train:FD001:39",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:8",
+            "actual_rul": 0,
+            "prediction": 3.674674036274568,
+            "absolute_error": 3.674674036274568
+          },
+          {
+            "engine_id": "train:FD001:93",
+            "actual_rul": 0,
+            "prediction": 0.09619807854895515,
+            "absolute_error": 0.09619807854895515
+          },
+          {
+            "engine_id": "train:FD001:23",
+            "actual_rul": 0,
+            "prediction": 4.19809934884094,
+            "absolute_error": 4.19809934884094
+          },
+          {
+            "engine_id": "train:FD001:60",
+            "actual_rul": 0,
+            "prediction": 2.610740373783709,
+            "absolute_error": 2.610740373783709
+          },
+          {
+            "engine_id": "train:FD001:63",
+            "actual_rul": 0,
+            "prediction": 4.7021384954144985,
+            "absolute_error": 4.7021384954144985
+          },
+          {
+            "engine_id": "train:FD001:14",
+            "actual_rul": 0,
+            "prediction": 1.5943103006842325,
+            "absolute_error": 1.5943103006842325
+          },
+          {
+            "engine_id": "train:FD001:80",
+            "actual_rul": 0,
+            "prediction": 0.0,
+            "absolute_error": 0.0
+          },
+          {
+            "engine_id": "train:FD001:1",
+            "actual_rul": 0,
+            "prediction": 4.126913540972319,
+            "absolute_error": 4.126913540972319
+          },
+          {
+            "engine_id": "train:FD001:38",
+            "actual_rul": 0,
+            "prediction": 0.29801714738961943,
+            "absolute_error": 0.29801714738961943
+          },
+          {
+            "engine_id": "train:FD001:33",
+            "actual_rul": 0,
+            "prediction": 0.8492883088971808,
+            "absolute_error": 0.8492883088971808
+          },
+          {
+            "engine_id": "train:FD001:31",
+            "actual_rul": 0,
+            "prediction": 0.7755977901916411,
+            "absolute_error": 0.7755977901916411
+          }
+        ]
+      },
+      "by_actual_rul_band": {
+        "0-19": {
+          "mae_cycles": 5.394764731902147,
+          "rmse_cycles": 8.209171162709522,
+          "cycles": 240,
+          "engines": 12
+        },
+        "20-49": {
+          "mae_cycles": 17.36330695070251,
+          "rmse_cycles": 23.67100631850728,
+          "cycles": 360,
+          "engines": 12
+        },
+        "50-99": {
+          "mae_cycles": 30.172885031354873,
+          "rmse_cycles": 36.88773313377106,
+          "cycles": 600,
+          "engines": 12
+        },
+        "100+": {
+          "mae_cycles": 26.585998484400765,
+          "rmse_cycles": 31.9149849385904,
+          "cycles": 932,
+          "engines": 12
+        }
+      }
+    }
+  },
+  "calibration": {
+    "nominal_coverage": 0.8,
+    "grouping": "predicted RUL band",
+    "calibration_unit": "engine maximum absolute residual within band",
+    "intervals": {
+      "0-19": {
+        "radius_cycles": 14.012001037597656,
+        "calibration_engines": 8,
+        "finite_sample_rank": 8,
+        "available": true
+      },
+      "20-49": {
+        "radius_cycles": 33.23393249511719,
+        "calibration_engines": 8,
+        "finite_sample_rank": 8,
+        "available": true
+      },
+      "50-99": {
+        "radius_cycles": 61.11424255371094,
+        "calibration_engines": 8,
+        "finite_sample_rank": 8,
+        "available": true
+      },
+      "100+": {
+        "radius_cycles": 82.83433532714844,
+        "calibration_engines": 8,
+        "finite_sample_rank": 8,
+        "available": true
+      }
+    }
+  },
+  "calibration_limitations": "Only eight calibration engines are available. Engine-block conformal radii use each engine's maximum absolute residual within a predicted-RUL band; finite 80% quantiles are unavailable when a band has too few distinct engines. Coverage assumes exchangeable engines and does not address simulator-to-real shift."
+}

@@ -20,8 +20,8 @@ On the real held-out FD001 validation cohort, cycle 120 had 15/2,600 feature val
 
 ## Environment and data
 
-- Executing in `/var/home/dylan/src/machine-health` on Fedora Linux 6.17.12-300.fc43.x86_64, x86_64, Intel Core i9-13900KF (24 cores / 32 logical CPUs), 31 GiB RAM. Python 3.14.8 in the project `.venv`; dependencies are locked in `requirements-lock.txt`.
-- NVIDIA GPU is not available to this process (`nvidia-smi` could not communicate with a driver); training and inference are CPU.
+- Executing in `/var/home/dylan/src/machine-health` on Bazzite Linux 44, x86_64, Python 3.14.8 in the project `.venv`; dependencies are locked in `requirements-lock.txt`.
+- The host NVIDIA driver is loaded and the host RTX 4090 is healthy. The default Codex command sandbox (`workspace-write`) hides `/dev/nvidia*` and `/dev/dri/*`, so ordinary commands cannot see the GPU and PyTorch correctly falls back to CPU. An approved escalated command can access the device. The project's `.venv` now has CUDA-enabled PyTorch 2.14.1+cu130; the CI lock remains CPU-only. TCN training and inference automatically select CUDA when PyTorch can access the device, with CPU fallback otherwise.
 - Official NASA archive and FD001 train/test inputs are local and ignored by Git. Train has 20,631 rows and 100 engines. The official test has 100 truncated trajectories with paired endpoint labels. Data hashes and retrieval provenance are local under `data/raw/provenance.json`.
 - NASA PCoE repository asks for dataset and donor acknowledgment. No distinct redistribution license was identified; raw data stays local.
 - Git is a normal checkout on `main`, tracking `origin/main`. The frozen protocol preceded test scoring. Latest pushed commit before current Milestone 4 work is `0cad66d` on `origin/main`.
@@ -93,6 +93,16 @@ The TCN selected epoch 9 (17 epochs ran, limit 60, patience 8). The complete val
 - `.venv/bin/ruff check src tests app` — passed after adding the input-support audit.
 - `.venv/bin/pytest -q` — 29 passed; one existing Starlette `TestClient`/`httpx` deprecation warning.
 - `.venv/bin/machine-health audit-input-support` — generated `reports/input_support_v1.json` and `.md` from local NASA training/validation data. Inputs use the fixed engine split and training-only feature quantiles; report provenance includes dataset/split and source hashes. Official-test files/labels and RUL labels were not used.
+
+## GPU and CPU runtime selection — 2026-10-27
+
+The optional causal TCN selects CUDA at runtime when PyTorch can access it, otherwise CPU. Checkpoint normalization tensors stay on CPU for NumPy preprocessing, while model weights and inference/training batches move to the selected device. Checkpoint and validation report provenance record the selected device, CUDA runtime, and GPU name; the CLI prints its selected device. Scikit-learn histogram gradient boosting remains CPU based. `scripts/install_torch.sh` installs PyTorch 2.14.1 CUDA 13.0 when `nvidia-smi` lists a GPU and verifies CUDA access; on a host without a GPU and without an existing CUDA build it installs PyTorch 2.14.1 CPU. If a restricted command sandbox hides GPU devices while a CUDA build already exists, the installer preserves that build. The host RTX 4090 and driver are healthy, but ordinary Codex `workspace-write` commands cannot access device nodes; GPU-dependent commands must use the approved escalated execution path when available. This retry rule is in this project's `AGENTS.md`. CI remains CPU-only through `requirements-lock.txt`.
+
+Real GPU validation: `.venv/bin/machine-health train-temporal --checkpoint artifacts/fd001_tcn_gpu.pt --output reports/temporal_model_gpu_v1.json --replay data/processed/temporal_validation_replay_gpu.csv` ran with approved host GPU access. Its report records PyTorch 2.14.1+cu130, CUDA 13.0, and the NVIDIA GeForce RTX 4090. It trained on the original training partition, used 8 distinct training engines for early stopping, scored on 12 validation model-selection engines, and calibrated on 8 disjoint validation engines. Window MAE/RMSE were 21.902/28.528 cycles versus 23.653/30.502 for the matched gradient-boosted baseline. Early stopping selected epoch 5 (13 epochs run). The complete-trajectory endpoint MAE/RMSE were 0.915/1.900 cycles; these endpoints are zero by construction and are not truncated-life evidence. The official test partition was not opened or scored.
+
+The saved GPU checkpoint reloaded onto CUDA and reproduced all 128 replay rows for engine `train:FD001:39` within 6.8e-06 cycles maximum absolute error. The normal restricted process sees the installed CUDA wheel but reports `cuda_available: false` and selects CPU; the same environment and code select CUDA when run with approved host access. The CPU lock and default CI path remain usable.
+
+Checks: `.venv/bin/ruff check src tests app` passed; `.venv/bin/pytest -q` passed (30 tests, one existing Starlette/httpx deprecation warning); `bash -n scripts/install_torch.sh` passed. The installer preserves CUDA PyTorch in the restricted sandbox and detects the RTX 4090 under approved host access. The CLI banner and report both confirmed CUDA selection for the real training run. Implementation commit: `179a9b0` (`Enable CUDA TCN with CPU fallback`). The GPU report and this status update are prepared for a separate local evidence commit. No official-test evaluation was run.
 
 ## Launch and next steps
 
