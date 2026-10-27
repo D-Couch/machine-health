@@ -72,6 +72,12 @@ From the project directory, after local dependencies/data/artifact are present:
 podman compose up --build
 ```
 
-Recreate the local environment with `python3 -m venv .venv && .venv/bin/pip install -r requirements-lock.txt && .venv/bin/pip install -e '.[dev]'`. Acquire and prepare data, then train with the README commands. The official test result is a frozen benchmark and must not be fed back into model or alert tuning. Further work can focus on a larger engine-level calibration set, uncertainty robustness, and broader subsets under a new validation design.
+Recreate the local environment with `python3 -m venv .venv && .venv/bin/pip install -r requirements-lock.txt && .venv/bin/pip install -e '.[dev]'`. Acquire and prepare data, then train with the README commands. The official test result is a frozen benchmark and must not be fed back into model or alert tuning. Future uncertainty or broader-subset work requires a new documented validation design and should follow the product workflow milestones unless a concrete user need prioritizes it.
 
-The dashboard shows a TCN option and calibrated interval when `train-temporal` outputs are present. A remaining limitation is that the current run uses only 8 calibration engines; intervals are coarse and can be wide. Model-selection uses 12 engines, so score uncertainty is substantial. No TCN official-test metric is claimed or available. Portfolio dashboard changes are committed locally as `e8d934d`; this update has not been pushed.
+The dashboard shows a TCN option and calibrated interval when `train-temporal` outputs are present. A remaining limitation is that the current run uses only 8 calibration engines; intervals are coarse and can be wide. Model-selection uses 12 engines, so score uncertainty is substantial. No TCN official-test metric is claimed or available. Dashboard changes are included in `5c83d75`, pushed to `origin/main`.
+
+## Roadmap revision — 2026-10-27
+
+Milestones 1–3 are complete. The former Milestone 4 combined visual polish with optional input monitoring and deployment notes, but did not specify a concrete maintenance user or decision. `PROJECT_BRIEF.md` now replaces that with three sequenced milestones: Milestone 4 builds a benchmark-backed fleet-to-asset inspection-planning workflow; Milestone 5 adds a local human-review prototype and task-based usability checks; Milestone 6 makes the product and evidence easy to evaluate from a fresh clone. Broader operational relevance, data drift work, and any deployment are separately gated on a concrete need and suitable data. The official test remains frozen and excluded from interactive product exploration.
+
+The next implementation task is Milestone 4: define the planner's review horizon and a leakage-safe validation-cohort snapshot/queue contract before changing dashboard behavior. Queue ranking must use inference outputs and explicit policy inputs only; ground-truth outcomes remain retrospective evidence.

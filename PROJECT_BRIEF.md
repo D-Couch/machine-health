@@ -4,7 +4,9 @@
 Build an end-to-end predictive maintenance portfolio project for applied AI/ML and ML engineering roles. Estimate remaining useful life (RUL) from multivariate equipment sensor histories, replay predictions over time, and evaluate maintenance alerts. Emphasize reproducibility, honest evaluation, usable software, and clear explanations. This complements the owner's MRI/quantum ML, Magic rules assistant, and network diagnostics projects by adding industrial time-series ML.
 
 ## Product
-A user selects an engine and replays its recorded sensor history. The interface shows observed sensor traces, predicted cycles remaining, model selection, and alert status. Evaluation views show withheld ground truth and errors separately from live-style predictions. Later versions add calibrated prediction intervals and alert-policy comparisons. Recorded replay is not live telemetry. Predictions are a simulation-based research demonstration, not validated equipment maintenance advice.
+The project has two linked outcomes: a rigorous, reproducible ML benchmark and a benchmark-backed maintenance decision-support prototype. The product perspective is a reliability or maintenance planner reviewing a simulated fleet, prioritizing assets for inspection, and deciding whether to inspect, monitor, defer, or dismiss an alert. The interface should connect fleet-level prioritization to an asset's sensor history, prediction, uncertainty, alert rationale, and evaluation evidence.
+
+NASA C-MAPSS is a narrow simulated benchmark, not a representative industrial fleet. Fleet and workflow views must label the data as simulated benchmark engines. The product prototype demonstrates how model outputs could fit into a planning workflow; it does not claim deployment readiness, measured business savings, aircraft maintenance suitability, or validated maintenance advice. Keep measured benchmark outcomes separate from user-entered or illustrative workload/cost assumptions. Recorded replay is not live telemetry.
 
 ## Data
 Start with NASA C-MAPSS FD001 only. Official starting point: https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/
@@ -56,11 +58,47 @@ Deliver a small working vertical slice, not just scaffolding:
 - Separate calibration engines, interval coverage/width evaluation, and dashboard intervals.
 - A concise model card and technical report covering limitations, selected approach, operational tradeoffs, and reproducibility.
 
-### Milestone 4 — portfolio polish
-- Clear architecture figure, polished dashboard, screenshots from real runs, and a short reproducible demo.
-- Inspect the rendered interface and fix broken, crowded, or misleading views.
-- Optional local input-quality monitoring: missing sensors, invalid ranges, feature drift. Distinguish input drift from measured accuracy loss; ground-truth performance monitoring requires delayed labels.
-- Cloud deployment instructions may be added after the local workflow works. Do not incur hosting costs as part of this brief.
+### Milestone 4 — maintenance decision-support workflow
+Make the project's user, decision, and workflow explicit, then reshape the existing dashboard around that job. Keep the current model and evaluation work as the evidence layer; this milestone does not require another model.
+- Write a concise product brief naming the maintenance/reliability planner, the inspection-prioritization decision, the planning horizon, the supported actions, the intended benefit, and explicit non-goals. Align the README and dashboard opening view with it.
+- Add a fleet overview and prioritized review queue over an explicitly identified validation cohort. Show scope and eligibility. Queue ordering may use predictions and documented policy inputs only; ground-truth RUL and outcomes are retrospective evaluation evidence, never ranking inputs.
+- Add an asset review view linking priority to prediction, uncertainty where available, observed sensor history, alert rationale, model/artifact version, and relevant validation evidence.
+- Add a policy explorer for threshold, persistence, and planning-horizon tradeoffs. Report measured validation alert counts, lead time, false alarms, misses, and review workload with clear denominators. Any interactive curves are explicitly retrospective validation analysis, not blind deployment results; do not label a threshold "optimal" based on repeated exploration. Keep the official test set frozen and out of interactive tuning.
+- Clearly distinguish measured benchmark results from illustrative assumptions. Do not invent costs, avoided downtime, ROI, or operational impact.
+- Preserve the existing replay and methods/evaluation views, adapting navigation and language to the fleet-to-asset workflow.
+
+Acceptance criteria:
+- A reviewer can identify the intended user and decision, start at the simulated fleet, inspect a prioritized asset, understand the evidence and alert rationale, and explore policy tradeoffs.
+- Every fleet view says which benchmark cohort and model outputs it uses; every retrospective outcome is visibly labeled as evaluation data.
+- Tests verify that queue ordering does not consume ground-truth labels, policy scoring uses labels only for explicitly retrospective validation outcomes, and the official test partition is never loaded by the interactive workflow. Existing benchmark reports remain reproducible and unchanged.
+- No user-facing copy implies live telemetry, real-fleet validation, maintenance advice, or measured economic benefit.
+
+### Milestone 5 — human review loop and usability
+Demonstrate the human handoff without implying an integration with a real maintenance system.
+- Let a reviewer record a local prototype disposition: inspect, monitor, defer, or dismiss, with an optional rationale.
+- Show disposition and alert history for the selected benchmark engine. Label this as local demonstration state; it is not production CMMS data or model feedback.
+- Define task-based usability checks: find urgent assets, explain a priority, choose a disposition, compare policies, and distinguish evidence from assumptions.
+- Review the experience with maintenance/reliability practitioners if available. Record task observations and resulting changes. If no practitioners are available, perform a structured self-review and explicitly state that external usability review remains outstanding.
+
+Acceptance criteria:
+- The reviewer can complete the defined workflow and understand what is recorded, where it is stored, and what the prediction supports.
+- Usability findings are recorded without claiming user validation when no target users participated.
+- Prototype dispositions do not alter model predictions, evaluation results, or the frozen official-test protocol.
+
+### Milestone 6 — portfolio readiness and reproducibility
+- Provide a clear architecture figure, polished rendered dashboard, screenshots captured from real project reports/artifacts, and a short reproducible demo path.
+- Inspect the rendered interface and fix broken, crowded, inaccessible, or misleading views.
+- Make the fresh-clone walkthrough useful from committed reports without local NASA data or model files; document the additional local prerequisites for replay and retraining.
+- Connect displayed results to versioned reports, splits, configuration, and model artifacts. State the benchmark scope and limitations where reviewers encounter results.
+- Keep local launch simple. Optional cloud deployment instructions may be added only after the local workflow works; no hosting costs are required.
+
+Acceptance criteria:
+- A reviewer can follow the documented demo and understand the product workflow and ML evidence without hidden local files or author narration.
+- Screenshots and demo results correspond to actual recorded runs; no synthetic fixture result is presented as benchmark performance.
+- Relevant tests, lint, and fresh-clone smoke checks pass, and docs/STATUS.md records exact commands and remaining limitations.
+
+### Future, separately gated — broader operational relevance
+Do not treat this as a commitment to deploy the current model. Consider broader datasets or fault modes, local input-quality monitoring, delayed-label performance monitoring, real maintenance-system integration, or deployment only when a concrete user need and suitable data/access are available. Any new evaluation requires a new documented validation design. Distinguish input drift from measured accuracy loss; accuracy monitoring requires labels. No paid cloud services are required by this brief.
 
 ## Suggested structure
 src/machine_health/ for data, features, models, evaluation, artifacts, CLI and later API; app/ for dashboard; configs/; tests/; docs/; reports/ for small versioned results; data/ and artifacts/ ignored by Git. Adapt this structure if a simpler arrangement is clearer. Avoid empty modules and speculative abstractions.
