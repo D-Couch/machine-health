@@ -8,7 +8,7 @@ Run it after the local NASA FD001 training file and split manifest are present:
 .venv/bin/machine-health audit-input-support
 ```
 
-The command builds the same causal features as training, fits each feature's 1st and 99th percentile bounds on the 80 training engines, and checks validation engines at fixed cycles 60, 120, and 180. It reads the training partition only; it does not load RUL labels, the official test sensors, or official test labels. JSON and Markdown outputs include the data/split hashes, source hashes, selected engine groups, number of engines available at each snapshot, per-feature coverage, and per-engine detail.
+The command builds the same causal features as training, fits each feature's 1st and 99th percentile bounds on the 80 training engines, and scores held-out validation engines at fixed cycles 60, 120, and 180. It does not read RUL labels or load official test sensors or labels. JSON and Markdown outputs include the data/split hashes, source hashes, selected engine groups, number of engines available at each snapshot, per-feature coverage, and per-engine detail.
 
 ## Current FD001 observation
 
