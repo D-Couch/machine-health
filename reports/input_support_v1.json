@@ -1,0 +1,1333 @@
+{
+  "dataset": "NASA C-MAPSS FD001; descriptive input support audit",
+  "interpretation": "Feature values outside the training 1st\u201399th percentile bounds are a descriptive input-support signal, not evidence of prediction error or a production alert rate.",
+  "quantiles": {
+    "lower": 0.01,
+    "upper": 0.99,
+    "reference_rows": 16987,
+    "reference_engines": 80
+  },
+  "features": [
+    "cycle",
+    "setting_1",
+    "setting_2",
+    "setting_3",
+    "sensor_1_mean_5",
+    "sensor_1_std_5",
+    "sensor_1_mean_10",
+    "sensor_1_std_10",
+    "sensor_1_mean_20",
+    "sensor_1_std_20",
+    "sensor_2_mean_5",
+    "sensor_2_std_5",
+    "sensor_2_mean_10",
+    "sensor_2_std_10",
+    "sensor_2_mean_20",
+    "sensor_2_std_20",
+    "sensor_3_mean_5",
+    "sensor_3_std_5",
+    "sensor_3_mean_10",
+    "sensor_3_std_10",
+    "sensor_3_mean_20",
+    "sensor_3_std_20",
+    "sensor_4_mean_5",
+    "sensor_4_std_5",
+    "sensor_4_mean_10",
+    "sensor_4_std_10",
+    "sensor_4_mean_20",
+    "sensor_4_std_20",
+    "sensor_5_mean_5",
+    "sensor_5_std_5",
+    "sensor_5_mean_10",
+    "sensor_5_std_10",
+    "sensor_5_mean_20",
+    "sensor_5_std_20",
+    "sensor_6_mean_5",
+    "sensor_6_std_5",
+    "sensor_6_mean_10",
+    "sensor_6_std_10",
+    "sensor_6_mean_20",
+    "sensor_6_std_20",
+    "sensor_7_mean_5",
+    "sensor_7_std_5",
+    "sensor_7_mean_10",
+    "sensor_7_std_10",
+    "sensor_7_mean_20",
+    "sensor_7_std_20",
+    "sensor_8_mean_5",
+    "sensor_8_std_5",
+    "sensor_8_mean_10",
+    "sensor_8_std_10",
+    "sensor_8_mean_20",
+    "sensor_8_std_20",
+    "sensor_9_mean_5",
+    "sensor_9_std_5",
+    "sensor_9_mean_10",
+    "sensor_9_std_10",
+    "sensor_9_mean_20",
+    "sensor_9_std_20",
+    "sensor_10_mean_5",
+    "sensor_10_std_5",
+    "sensor_10_mean_10",
+    "sensor_10_std_10",
+    "sensor_10_mean_20",
+    "sensor_10_std_20",
+    "sensor_11_mean_5",
+    "sensor_11_std_5",
+    "sensor_11_mean_10",
+    "sensor_11_std_10",
+    "sensor_11_mean_20",
+    "sensor_11_std_20",
+    "sensor_12_mean_5",
+    "sensor_12_std_5",
+    "sensor_12_mean_10",
+    "sensor_12_std_10",
+    "sensor_12_mean_20",
+    "sensor_12_std_20",
+    "sensor_13_mean_5",
+    "sensor_13_std_5",
+    "sensor_13_mean_10",
+    "sensor_13_std_10",
+    "sensor_13_mean_20",
+    "sensor_13_std_20",
+    "sensor_14_mean_5",
+    "sensor_14_std_5",
+    "sensor_14_mean_10",
+    "sensor_14_std_10",
+    "sensor_14_mean_20",
+    "sensor_14_std_20",
+    "sensor_15_mean_5",
+    "sensor_15_std_5",
+    "sensor_15_mean_10",
+    "sensor_15_std_10",
+    "sensor_15_mean_20",
+    "sensor_15_std_20",
+    "sensor_16_mean_5",
+    "sensor_16_std_5",
+    "sensor_16_mean_10",
+    "sensor_16_std_10",
+    "sensor_16_mean_20",
+    "sensor_16_std_20",
+    "sensor_17_mean_5",
+    "sensor_17_std_5",
+    "sensor_17_mean_10",
+    "sensor_17_std_10",
+    "sensor_17_mean_20",
+    "sensor_17_std_20",
+    "sensor_18_mean_5",
+    "sensor_18_std_5",
+    "sensor_18_mean_10",
+    "sensor_18_std_10",
+    "sensor_18_mean_20",
+    "sensor_18_std_20",
+    "sensor_19_mean_5",
+    "sensor_19_std_5",
+    "sensor_19_mean_10",
+    "sensor_19_std_10",
+    "sensor_19_mean_20",
+    "sensor_19_std_20",
+    "sensor_20_mean_5",
+    "sensor_20_std_5",
+    "sensor_20_mean_10",
+    "sensor_20_std_10",
+    "sensor_20_mean_20",
+    "sensor_20_std_20",
+    "sensor_21_mean_5",
+    "sensor_21_std_5",
+    "sensor_21_mean_10",
+    "sensor_21_std_10",
+    "sensor_21_mean_20",
+    "sensor_21_std_20"
+  ],
+  "bounds": {
+    "cycle": {
+      "lower": 3.0,
+      "upper": 296.0
+    },
+    "setting_1": {
+      "lower": -0.0051,
+      "upper": 0.005
+    },
+    "setting_2": {
+      "lower": -0.0005,
+      "upper": 0.0005
+    },
+    "setting_3": {
+      "lower": 100.0,
+      "upper": 100.0
+    },
+    "sensor_1_mean_5": {
+      "lower": 518.67,
+      "upper": 518.67
+    },
+    "sensor_1_std_5": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_1_mean_10": {
+      "lower": 518.67,
+      "upper": 518.67
+    },
+    "sensor_1_std_10": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_1_mean_20": {
+      "lower": 518.67,
+      "upper": 518.67
+    },
+    "sensor_1_std_20": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_2_mean_5": {
+      "lower": 641.902,
+      "upper": 643.678
+    },
+    "sensor_2_std_5": {
+      "lower": 0.060860496233519565,
+      "upper": 0.4958824053434451
+    },
+    "sensor_2_mean_10": {
+      "lower": 641.9588600000001,
+      "upper": 643.6030000000001
+    },
+    "sensor_2_std_10": {
+      "lower": 0.11201419371830268,
+      "upper": 0.4482848095714957
+    },
+    "sensor_2_mean_20": {
+      "lower": 641.9834766666667,
+      "upper": 643.5025
+    },
+    "sensor_2_std_20": {
+      "lower": 0.12425534939563042,
+      "upper": 0.4206213557387042
+    },
+    "sensor_3_mean_5": {
+      "lower": 1581.5906,
+      "upper": 1602.84736
+    },
+    "sensor_3_std_5": {
+      "lower": 0.8060011666795602,
+      "upper": 6.556145557077889
+    },
+    "sensor_3_mean_10": {
+      "lower": 1582.36044,
+      "upper": 1601.78298
+    },
+    "sensor_3_std_10": {
+      "lower": 1.4394925645348484,
+      "upper": 5.970547522532394
+    },
+    "sensor_3_mean_20": {
+      "lower": 1582.75959,
+      "upper": 1600.30413
+    },
+    "sensor_3_std_20": {
+      "lower": 1.8235930991098377,
+      "upper": 5.558029852417226
+    },
+    "sensor_4_mean_5": {
+      "lower": 1394.79172,
+      "upper": 1428.50828
+    },
+    "sensor_4_std_5": {
+      "lower": 0.7651564960137591,
+      "upper": 6.485862804589942
+    },
+    "sensor_4_mean_10": {
+      "lower": 1395.3971666666666,
+      "upper": 1426.99184
+    },
+    "sensor_4_std_10": {
+      "lower": 1.4166485800283126,
+      "upper": 5.881881808457738
+    },
+    "sensor_4_mean_20": {
+      "lower": 1395.53867,
+      "upper": 1425.25669
+    },
+    "sensor_4_std_20": {
+      "lower": 1.770421722242054,
+      "upper": 5.66462676691774
+    },
+    "sensor_5_mean_5": {
+      "lower": 14.62,
+      "upper": 14.62
+    },
+    "sensor_5_std_5": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_5_mean_10": {
+      "lower": 14.62,
+      "upper": 14.62
+    },
+    "sensor_5_std_10": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_5_mean_20": {
+      "lower": 14.62,
+      "upper": 14.62
+    },
+    "sensor_5_std_20": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_6_mean_5": {
+      "lower": 21.606,
+      "upper": 21.61
+    },
+    "sensor_6_std_5": {
+      "lower": 0.0,
+      "upper": 0.004898979485565328
+    },
+    "sensor_6_mean_10": {
+      "lower": 21.607,
+      "upper": 21.61
+    },
+    "sensor_6_std_10": {
+      "lower": 0.0,
+      "upper": 0.004582575694954666
+    },
+    "sensor_6_mean_20": {
+      "lower": 21.6075,
+      "upper": 21.61
+    },
+    "sensor_6_std_20": {
+      "lower": 0.0,
+      "upper": 0.004330127018920843
+    },
+    "sensor_7_mean_5": {
+      "lower": 551.4440000000001,
+      "upper": 554.78
+    },
+    "sensor_7_std_5": {
+      "lower": 0.0765547976126722,
+      "upper": 0.6715970174397234
+    },
+    "sensor_7_mean_10": {
+      "lower": 551.56486,
+      "upper": 554.7372628571429
+    },
+    "sensor_7_std_10": {
+      "lower": 0.15000000000000172,
+      "upper": 0.6027597979572681
+    },
+    "sensor_7_mean_20": {
+      "lower": 551.73743,
+      "upper": 554.700605
+    },
+    "sensor_7_std_20": {
+      "lower": 0.18419057961050464,
+      "upper": 0.5768529885768251
+    },
+    "sensor_8_mean_5": {
+      "lower": 2387.984,
+      "upper": 2388.27
+    },
+    "sensor_8_std_5": {
+      "lower": 0.0049999999999954525,
+      "upper": 0.048744230427798955
+    },
+    "sensor_8_mean_10": {
+      "lower": 2387.988,
+      "upper": 2388.261
+    },
+    "sensor_8_std_10": {
+      "lower": 0.011116554706631459,
+      "upper": 0.04467661580878707
+    },
+    "sensor_8_mean_20": {
+      "lower": 2387.99,
+      "upper": 2388.2475
+    },
+    "sensor_8_std_20": {
+      "lower": 0.01299038105687605,
+      "upper": 0.04281267304719817
+    },
+    "sensor_9_mean_5": {
+      "lower": 9038.27604,
+      "upper": 9153.2842
+    },
+    "sensor_9_std_5": {
+      "lower": 0.8452287551766651,
+      "upper": 7.083890991255608
+    },
+    "sensor_9_mean_10": {
+      "lower": 9039.09944,
+      "upper": 9146.83926
+    },
+    "sensor_9_std_10": {
+      "lower": 1.5631459611086906,
+      "upper": 8.319530277865208
+    },
+    "sensor_9_mean_20": {
+      "lower": 9039.74182,
+      "upper": 9136.94375
+    },
+    "sensor_9_std_20": {
+      "lower": 1.9527691320096965,
+      "upper": 13.152221019549687
+    },
+    "sensor_10_mean_5": {
+      "lower": 1.3,
+      "upper": 1.3
+    },
+    "sensor_10_std_5": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_10_mean_10": {
+      "lower": 1.3,
+      "upper": 1.3
+    },
+    "sensor_10_std_10": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_10_mean_20": {
+      "lower": 1.3,
+      "upper": 1.3
+    },
+    "sensor_10_std_20": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_11_mean_5": {
+      "lower": 47.116573333333335,
+      "upper": 48.138
+    },
+    "sensor_11_std_5": {
+      "lower": 0.020563934768726606,
+      "upper": 0.16773789077003468
+    },
+    "sensor_11_mean_10": {
+      "lower": 47.124,
+      "upper": 48.101
+    },
+    "sensor_11_std_10": {
+      "lower": 0.03898722151395872,
+      "upper": 0.15213664903367013
+    },
+    "sensor_11_mean_20": {
+      "lower": 47.13143,
+      "upper": 48.045
+    },
+    "sensor_11_std_20": {
+      "lower": 0.04999999999999716,
+      "upper": 0.15075768427262917
+    },
+    "sensor_12_mean_5": {
+      "lower": 519.7437199999999,
+      "upper": 522.578
+    },
+    "sensor_12_std_5": {
+      "lower": 0.06011453953950262,
+      "upper": 0.49177797421341524
+    },
+    "sensor_12_mean_10": {
+      "lower": 519.845,
+      "upper": 522.54
+    },
+    "sensor_12_std_10": {
+      "lower": 0.11389465230873928,
+      "upper": 0.4500484046178441
+    },
+    "sensor_12_mean_20": {
+      "lower": 519.9894999999999,
+      "upper": 522.518466923077
+    },
+    "sensor_12_std_20": {
+      "lower": 0.13470573280229617,
+      "upper": 0.43342097598794604
+    },
+    "sensor_13_mean_5": {
+      "lower": 2387.98,
+      "upper": 2388.27
+    },
+    "sensor_13_std_5": {
+      "lower": 0.004898979529478266,
+      "upper": 0.04996558623328249
+    },
+    "sensor_13_mean_10": {
+      "lower": 2387.9849999999997,
+      "upper": 2388.259
+    },
+    "sensor_13_std_10": {
+      "lower": 0.010946442626741883,
+      "upper": 0.04584124639681348
+    },
+    "sensor_13_mean_20": {
+      "lower": 2387.987,
+      "upper": 2388.2455
+    },
+    "sensor_13_std_20": {
+      "lower": 0.013252928685552584,
+      "upper": 0.04369210455793511
+    },
+    "sensor_14_mean_5": {
+      "lower": 8116.402880000001,
+      "upper": 8218.39424
+    },
+    "sensor_14_std_5": {
+      "lower": 0.6639843297990038,
+      "upper": 5.475282407729791
+    },
+    "sensor_14_mean_10": {
+      "lower": 8116.96064,
+      "upper": 8213.86978
+    },
+    "sensor_14_std_10": {
+      "lower": 1.187730284105185,
+      "upper": 6.8342003622057295
+    },
+    "sensor_14_mean_20": {
+      "lower": 8118.23624,
+      "upper": 8205.16242
+    },
+    "sensor_14_std_20": {
+      "lower": 1.3645326050494906,
+      "upper": 10.91526148995171
+    },
+    "sensor_15_mean_5": {
+      "lower": 8.3851344,
+      "upper": 8.5202768
+    },
+    "sensor_15_std_5": {
+      "lower": 0.00391105153604676,
+      "upper": 0.032895798842245014
+    },
+    "sensor_15_mean_10": {
+      "lower": 8.3882672,
+      "upper": 8.515198400000001
+    },
+    "sensor_15_std_10": {
+      "lower": 0.007135746366332738,
+      "upper": 0.029358073187006124
+    },
+    "sensor_15_mean_20": {
+      "lower": 8.3899086,
+      "upper": 8.5067376
+    },
+    "sensor_15_std_20": {
+      "lower": 0.00810662325272686,
+      "upper": 0.027698886364224847
+    },
+    "sensor_16_mean_5": {
+      "lower": 0.03,
+      "upper": 0.03
+    },
+    "sensor_16_std_5": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_16_mean_10": {
+      "lower": 0.03,
+      "upper": 0.03
+    },
+    "sensor_16_std_10": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_16_mean_20": {
+      "lower": 0.03,
+      "upper": 0.03
+    },
+    "sensor_16_std_20": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_17_mean_5": {
+      "lower": 391.0,
+      "upper": 396.4
+    },
+    "sensor_17_std_5": {
+      "lower": 0.0,
+      "upper": 1.5491933384829788
+    },
+    "sensor_17_mean_10": {
+      "lower": 391.0,
+      "upper": 396.1
+    },
+    "sensor_17_std_10": {
+      "lower": 0.347237959199845,
+      "upper": 1.4282856857075483
+    },
+    "sensor_17_mean_20": {
+      "lower": 391.1,
+      "upper": 395.75
+    },
+    "sensor_17_std_20": {
+      "lower": 0.47140452079102935,
+      "upper": 1.326649916142177
+    },
+    "sensor_18_mean_5": {
+      "lower": 2388.0,
+      "upper": 2388.0
+    },
+    "sensor_18_std_5": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_18_mean_10": {
+      "lower": 2388.0,
+      "upper": 2388.0
+    },
+    "sensor_18_std_10": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_18_mean_20": {
+      "lower": 2388.0,
+      "upper": 2388.0
+    },
+    "sensor_18_std_20": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_19_mean_5": {
+      "lower": 100.0,
+      "upper": 100.0
+    },
+    "sensor_19_std_5": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_19_mean_10": {
+      "lower": 100.0,
+      "upper": 100.0
+    },
+    "sensor_19_std_10": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_19_mean_20": {
+      "lower": 100.0,
+      "upper": 100.0
+    },
+    "sensor_19_std_20": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "sensor_20_mean_5": {
+      "lower": 38.444,
+      "upper": 39.098279999999995
+    },
+    "sensor_20_std_5": {
+      "lower": 0.020396078054683887,
+      "upper": 0.16281424642140005
+    },
+    "sensor_20_mean_10": {
+      "lower": 38.467,
+      "upper": 39.09014
+    },
+    "sensor_20_std_10": {
+      "lower": 0.03891422785473669,
+      "upper": 0.1497328252184965
+    },
+    "sensor_20_mean_20": {
+      "lower": 38.510000000000005,
+      "upper": 39.08540076923077
+    },
+    "sensor_20_std_20": {
+      "lower": 0.045000000000001705,
+      "upper": 0.13907280465727404
+    },
+    "sensor_21_mean_5": {
+      "lower": 23.067140000000002,
+      "upper": 23.4537456
+    },
+    "sensor_21_std_5": {
+      "lower": 0.01207261585934843,
+      "upper": 0.09798637130543299
+    },
+    "sensor_21_mean_10": {
+      "lower": 23.0834586,
+      "upper": 23.446354200000002
+    },
+    "sensor_21_std_10": {
+      "lower": 0.021945184536194307,
+      "upper": 0.08885020475914181
+    },
+    "sensor_21_mean_20": {
+      "lower": 23.1042067,
+      "upper": 23.442262399999997
+    },
+    "sensor_21_std_20": {
+      "lower": 0.025291830957914343,
+      "upper": 0.0827299130465022
+    }
+  },
+  "snapshots": [
+    {
+      "snapshot_cycle": 60,
+      "validation_engines": 20,
+      "feature_cells": 2600,
+      "out_of_support_cells": 14,
+      "out_of_support_fraction": 0.005384615384615384,
+      "engines_with_any_out_of_support_feature": 9,
+      "per_engine": [
+        {
+          "engine_id": "train:FD001:1",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "out_of_support_features": 3,
+          "fraction_out_of_support": 0.023076923076923078,
+          "feature_names": [
+            "sensor_12_std_5",
+            "sensor_15_std_5",
+            "sensor_15_std_20"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_11_mean_5"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_21_mean_20"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "out_of_support_features": 2,
+          "fraction_out_of_support": 0.015384615384615385,
+          "feature_names": [
+            "sensor_20_mean_5",
+            "sensor_20_mean_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "out_of_support_features": 2,
+          "fraction_out_of_support": 0.015384615384615385,
+          "feature_names": [
+            "sensor_3_mean_10",
+            "sensor_8_std_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_3_std_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_20_std_5"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_15_std_20"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "out_of_support_features": 2,
+          "fraction_out_of_support": 0.015384615384615385,
+          "feature_names": [
+            "sensor_7_std_5",
+            "sensor_8_std_5"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        }
+      ],
+      "feature_counts": [
+        {
+          "feature": "sensor_15_std_20",
+          "engine_count": 2
+        },
+        {
+          "feature": "sensor_3_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_21_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_20_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_8_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_3_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_11_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_8_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_12_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_7_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_15_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_20_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_20_mean_10",
+          "engine_count": 1
+        }
+      ]
+    },
+    {
+      "snapshot_cycle": 120,
+      "validation_engines": 20,
+      "feature_cells": 2600,
+      "out_of_support_cells": 15,
+      "out_of_support_fraction": 0.0057692307692307696,
+      "engines_with_any_out_of_support_feature": 5,
+      "per_engine": [
+        {
+          "engine_id": "train:FD001:1",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:8",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:23",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_13_std_5"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_14_std_5"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:39",
+          "out_of_support_features": 10,
+          "fraction_out_of_support": 0.07692307692307693,
+          "feature_names": [
+            "sensor_2_mean_5",
+            "sensor_4_std_20",
+            "sensor_7_std_10",
+            "sensor_9_mean_10",
+            "sensor_9_mean_20",
+            "sensor_12_std_20",
+            "sensor_14_mean_5",
+            "sensor_14_mean_10",
+            "sensor_14_mean_20",
+            "sensor_15_mean_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:58",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:60",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:63",
+          "out_of_support_features": 2,
+          "fraction_out_of_support": 0.015384615384615385,
+          "feature_names": [
+            "sensor_17_std_5",
+            "sensor_17_std_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:70",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:74",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:93",
+          "out_of_support_features": 1,
+          "fraction_out_of_support": 0.007692307692307693,
+          "feature_names": [
+            "sensor_3_std_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        }
+      ],
+      "feature_counts": [
+        {
+          "feature": "sensor_3_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_2_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_17_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_14_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_4_std_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_7_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_9_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_9_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_12_std_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_17_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_15_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_14_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_14_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_14_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_13_std_5",
+          "engine_count": 1
+        }
+      ]
+    },
+    {
+      "snapshot_cycle": 180,
+      "validation_engines": 11,
+      "feature_cells": 1430,
+      "out_of_support_cells": 27,
+      "out_of_support_fraction": 0.01888111888111888,
+      "engines_with_any_out_of_support_feature": 4,
+      "per_engine": [
+        {
+          "engine_id": "train:FD001:1",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:14",
+          "out_of_support_features": 15,
+          "fraction_out_of_support": 0.11538461538461539,
+          "feature_names": [
+            "sensor_2_mean_10",
+            "sensor_3_mean_10",
+            "sensor_3_mean_20",
+            "sensor_11_mean_5",
+            "sensor_11_mean_10",
+            "sensor_11_mean_20",
+            "sensor_17_mean_5",
+            "sensor_17_mean_10",
+            "sensor_17_mean_20",
+            "sensor_20_mean_5",
+            "sensor_20_mean_10",
+            "sensor_20_mean_20",
+            "sensor_21_mean_5",
+            "sensor_21_mean_10",
+            "sensor_21_mean_20"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:30",
+          "out_of_support_features": 4,
+          "fraction_out_of_support": 0.03076923076923077,
+          "feature_names": [
+            "sensor_8_std_5",
+            "sensor_8_std_20",
+            "sensor_12_std_10",
+            "sensor_12_std_20"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:31",
+          "out_of_support_features": 2,
+          "fraction_out_of_support": 0.015384615384615385,
+          "feature_names": [
+            "sensor_2_std_5",
+            "sensor_2_std_20"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:33",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:38",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:42",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:47",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:80",
+          "out_of_support_features": 6,
+          "fraction_out_of_support": 0.046153846153846156,
+          "feature_names": [
+            "sensor_3_mean_5",
+            "sensor_3_mean_10",
+            "sensor_3_mean_20",
+            "sensor_9_std_10",
+            "sensor_11_std_20",
+            "sensor_14_std_10"
+          ]
+        },
+        {
+          "engine_id": "train:FD001:94",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        },
+        {
+          "engine_id": "train:FD001:100",
+          "out_of_support_features": 0,
+          "fraction_out_of_support": 0.0,
+          "feature_names": []
+        }
+      ],
+      "feature_counts": [
+        {
+          "feature": "sensor_3_mean_10",
+          "engine_count": 2
+        },
+        {
+          "feature": "sensor_3_mean_20",
+          "engine_count": 2
+        },
+        {
+          "feature": "sensor_21_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_17_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_2_std_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_3_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_2_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_2_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_11_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_8_std_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_8_std_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_9_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_14_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_12_std_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_12_std_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_11_std_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_11_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_11_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_17_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_21_mean_5",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_17_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_21_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_20_mean_20",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_20_mean_10",
+          "engine_count": 1
+        },
+        {
+          "feature": "sensor_20_mean_5",
+          "engine_count": 1
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "data_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "split_manifest_sha256": "b3dc2188f4b937ad28c64bad00ad2dbda7c21fc7d89902754626e73335f4f2d6",
+    "code_revision": "2d59908224c34f49d98ecc5a7e2a6eb547be36dd",
+    "source_sha256": {
+      "src/machine_health/input_monitoring.py": "5e931657e7d674422a51db63e26b3cca624cac24c9868fba839488db20854fc1",
+      "src/machine_health/features.py": "481a4a7d73a8c17ab1ecf0628f84c892d13c20ea68dfb265888ff802bb3b7638",
+      "src/machine_health/data.py": "bd6a45ea449f345bfb86039304c525ba1217c69d9fd7b7202310289dea036845",
+      "src/machine_health/cli.py": "78a9ddcba7176c2cbcf348e5cb3132696090a0aed8bdeed7501c8b72e10c517d"
+    },
+    "validation_engines": [
+      "train:FD001:1",
+      "train:FD001:100",
+      "train:FD001:14",
+      "train:FD001:23",
+      "train:FD001:30",
+      "train:FD001:31",
+      "train:FD001:33",
+      "train:FD001:38",
+      "train:FD001:39",
+      "train:FD001:42",
+      "train:FD001:47",
+      "train:FD001:58",
+      "train:FD001:60",
+      "train:FD001:63",
+      "train:FD001:70",
+      "train:FD001:74",
+      "train:FD001:8",
+      "train:FD001:80",
+      "train:FD001:93",
+      "train:FD001:94"
+    ]
+  },
+  "limitations": [
+    "The reference is derived from full run-to-failure NASA simulator training trajectories.",
+    "Validation contains only 20 complete engines and is not representative of field telemetry.",
+    "Univariate quantile bounds ignore feature dependence and do not measure model accuracy.",
+    "Snapshot diagnostics are descriptive and must not be interpreted as operational alarm thresholds."
+  ]
+}
