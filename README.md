@@ -67,6 +67,7 @@ For a container demo, first prepare data and train locally, then run `podman com
 Launch `.venv/bin/streamlit run app/streamlit_app.py` for the five-part project experience:
 
 - **Fleet review:** prediction-ranked validation queue at a common observation cycle, scenario controls, and an asset evidence view through the selected snapshot. Withheld labels are isolated in a retrospective evaluation expander.
+- **Local disposition history:** record inspect, monitor, defer, or dismiss with an optional rationale for a selected validation engine. Events include snapshot, prediction, policy, and artifact context and are stored in ignored `data/review_dispositions.sqlite` (override with `MACHINE_HEALTH_REVIEW_DB`). This is a local prototype log, not CMMS integration or model feedback.
 - **Project overview:** an engine-level partition diagram, project summary, and frozen test result.
 - **Engine replay:** scrub a validation engine by cycle, inspect sensor traces, predictions, and (for the TCN) its interval band. Validation truth is labeled as retrospective evaluation data.
 - **Evaluation evidence:** per-engine official endpoint errors, RUL-band breakdowns, matched validation model comparison, interval coverage/width, and alert tradeoffs.

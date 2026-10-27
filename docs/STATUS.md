@@ -1,12 +1,14 @@
 # Machine Health status — 2026-10-27
 
-## Milestones 1–4
+## Milestones 1–5
 
 Implemented a CPU-first NASA C-MAPSS FD001 pipeline with engine-held-out validation, causal rolling features, persisted sklearn artifact, Streamlit replay, strict FastAPI inference, validation-only alert threshold selection, local run provenance index, and a frozen one-time official test report. See README for the workflow and `docs/EVALUATION_PROTOCOL.md` for the test boundary.
 
 Milestone 3 adds a compact causal PyTorch TCN, early stopping on training-group engines, a separate engine-level model-selection/calibration split within validation, nominal 80% engine-block conformal intervals, a model comparison report, and a model card. The five-tab dashboard walkthrough now includes the validation fleet review, project overview, replay, evaluation evidence, and methods/limitations. Report-driven views render without local raw data or model artifacts. The official test partition was not loaded during Milestone 3.
 
 Milestone 4 adds a reliability-planner framing and an as-of validation fleet queue. The default common snapshot is cycle 120; status and ranking use only prediction histories and policy settings. The asset view links ranked engines to prediction/interval evidence, sensors through the snapshot, and the model artifact hash. A separate validation-only retrospective what-if scorer reports first-alert workload, timely events, early false alarms, misses, and lead time. Milestone 4 acceptance checks passed; no trained model or frozen report was changed. The official test raw data was absent in an integration smoke copy, and the workflow rendered without it.
+
+Milestone 5 adds a local-only disposition form for inspect/monitor/defer/dismiss, optional rationale, and per-validation-engine append-only SQLite history. Each event preserves the as-of snapshot, prediction and optional interval, policy settings, model, and artifact hash; it stores no actual RUL and does not feed predictions, reports, or model training. The database is ignored by Git and can be redirected with `MACHINE_HEALTH_REVIEW_DB`. A structured author self-review and limitations are recorded in `docs/USABILITY_REVIEW.md`; external practitioner review remains outstanding.
 
 ## Environment and data
 
@@ -70,6 +72,11 @@ The TCN selected epoch 9 (17 epochs ran, limit 60, patience 8). The complete val
 - At the default shared snapshot (cycle 120) on the real 20-engine FD001 validation cohort, the tree queue displayed 1 Review, 1 Watch, and 18 Routine assets. This is an as-of prediction queue example, not a performance, workload-cost, or operational-impact claim. The default scenario's retrospective metrics matched the existing selected-policy report (20/20 timely, 0 early false alarms, 0 missed).
 - A temporary fresh-clone copy with committed reports but no raw data/artifacts rendered all five tabs and correctly gated fleet review/replay. Headless Streamlit `/` and `/_stcore/health` both returned HTTP 200; server stopped after smoke check.
 - No raw official-test sensors or endpoint labels were loaded, and no official-test score was rerun during Milestone 4 work.
+- `.venv/bin/ruff check src tests app` — passed after Milestone 5 changes.
+- `.venv/bin/pytest -q` — 25 passed; one existing Starlette `TestClient`/`httpx` deprecation warning.
+- Streamlit `AppTest` rendered all five tabs with no exceptions. A disposition plus rationale submitted to a temporary SQLite database, showed a saved-event success message, and appeared in the selected engine's history. The temporary database was outside the project.
+- Review-log tests confirm append-only event ordering, validation-engine filtering, provenance capture, absence of actual-RUL fields, and rejection of invalid namespace/disposition/hash/number/rationale/interval inputs.
+- The official test data, labels, frozen report, trained artifacts, and validation reports were not changed or evaluated during Milestone 5.
 
 ## Launch and next steps
 
@@ -87,6 +94,6 @@ The dashboard shows a TCN option and calibrated interval when `train-temporal` o
 
 ## Roadmap revision — 2026-10-27
 
-Milestones 1–4 are complete. The former Milestone 4 combined visual polish with optional input monitoring and deployment notes, but did not specify a concrete maintenance user or decision. `PROJECT_BRIEF.md` now replaces that with three sequenced milestones: Milestone 4 builds a benchmark-backed fleet-to-asset inspection-planning workflow; Milestone 5 adds a local human-review prototype and task-based usability checks; Milestone 6 makes the product and evidence easy to evaluate from a fresh clone. Broader operational relevance, data drift work, and any deployment are separately gated on a concrete need and suitable data. The official test remains frozen and excluded from interactive product exploration.
+Milestones 1–5 are complete. The former Milestone 4 combined visual polish with optional input monitoring and deployment notes, but did not specify a concrete maintenance user or decision. `PROJECT_BRIEF.md` now replaces that with three sequenced milestones: Milestone 4 builds a benchmark-backed fleet-to-asset inspection-planning workflow; Milestone 5 adds a local human-review prototype and task-based usability checks; Milestone 6 makes the product and evidence easy to evaluate from a fresh clone. Broader operational relevance, data drift work, and any deployment are separately gated on a concrete need and suitable data. The official test remains frozen and excluded from interactive product exploration.
 
-Milestone 4 acceptance was checked through prediction-only queue unit tests, separate retrospective scorer tests, app rendering in baseline/TCN modes, non-default policy controls, a report-only fresh-clone simulation, a temporary runtime without official-test sensors/labels, and HTTP health checks. The rendered workflow is not yet visually reviewed in a browser and no external practitioner review has been run; visual polish is in Milestone 6 and task-based usability review is in Milestone 5. Next implementation step: Milestone 5, add local prototype dispositions and document task-based self-review or practitioner observations without claiming validation that has not occurred.
+Milestone 4 acceptance was checked through prediction-only queue unit tests, separate retrospective scorer tests, app rendering in baseline/TCN modes, non-default policy controls, a report-only fresh-clone simulation, a temporary runtime without official-test sensors/labels, and HTTP health checks. Milestone 5 acceptance is checked through the review-log tests and temporary-database app interaction above. The rendered workflow is not yet visually reviewed in a browser and no external practitioner review has been run; the next implementation step is Milestone 6: fresh-clone onboarding, browser-level visual review, and final evidence discoverability.

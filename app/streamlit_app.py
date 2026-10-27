@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -18,6 +19,7 @@ from machine_health.data import attach_rul, load_fd001, sha256
 from machine_health.features import FEATURES, causal_features
 from machine_health.model import load_artifact
 from machine_health.planning import build_validation_review_queue
+from machine_health.review_log import DISPOSITIONS, list_dispositions, record_disposition
 
 REPORTS = ROOT / "reports"
 DATA = ROOT / "data/raw/train_FD001.txt"
@@ -25,6 +27,9 @@ ARTIFACT = ROOT / "artifacts/fd001.joblib"
 SPLIT = REPORTS / "fd001_split.json"
 TEMPORAL_REPLAY = ROOT / "data/processed/temporal_validation_replay.csv"
 TEMPORAL_SPLIT = REPORTS / "temporal_split.json"
+REVIEW_DATABASE = Path(os.environ.get(
+    "MACHINE_HEALTH_REVIEW_DB", str(ROOT / "data" / "review_dispositions.sqlite")
+))
 COLORS = {"navy": "#10243A", "blue": "#2864DC", "teal": "#16A89A",
           "orange": "#E28A3B", "red": "#D65757", "muted": "#66758A",
           "grid": "#E8EDF3"}
@@ -337,6 +342,52 @@ def render_fleet_review(split: dict, temporal: dict | None, alert: dict | None) 
                              color_discrete_sequence=[COLORS["blue"], COLORS["teal"], COLORS["orange"]])
         chart_layout(sensor_fig, height=330, title="Observed sensor history available at the selected snapshot")
         st.plotly_chart(sensor_fig, width="stretch", key="fleet_sensor_evidence")
+
+    st.subheader("Prototype review disposition · local only")
+    st.caption("Record a review choice before opening retrospective outcomes. This append-only note stays in the ignored local SQLite database; it is not sent to a CMMS and never changes predictions, policy scores, or model training.")
+    with st.form("fleet_review_disposition_form"):
+        disposition = st.selectbox(
+            "Review choice", DISPOSITIONS, format_func=str.title,
+            key="fleet_review_disposition",
+        )
+        rationale = st.text_area(
+            "Optional rationale", max_chars=1000,
+            placeholder="What evidence or planning context informed this choice?",
+            key="fleet_review_rationale",
+        )
+        saved = st.form_submit_button("Save local review note")
+        if saved:
+            lower = float(current.lower_cycles) if "lower_cycles" in current.index and pd.notna(current.lower_cycles) else None
+            upper = float(current.upper_cycles) if "upper_cycles" in current.index and pd.notna(current.upper_cycles) else None
+            event_id = record_disposition(
+                REVIEW_DATABASE, engine_id=selected_engine, snapshot_cycle=snapshot_cycle,
+                disposition=disposition, rationale=rationale, model_name=model_name,
+                artifact_sha256=artifact_digest,
+                predicted_rul_cycles=float(current.predicted_rul_cycles),
+                interval_lower_cycles=lower, interval_upper_cycles=upper,
+                threshold_cycles=threshold, persistence_cycles=persistence,
+                review_horizon_cycles=horizon,
+            )
+            st.success(f"Saved local review note #{event_id} for {selected_engine}.")
+
+    review_history = list_dispositions(REVIEW_DATABASE, engine_id=selected_engine)
+    with st.expander(f"Local disposition history · {len(review_history)} entries"):
+        if review_history:
+            history_view = pd.DataFrame(review_history).rename(columns={
+                "created_utc": "Recorded (UTC)", "snapshot_cycle": "Snapshot cycle",
+                "disposition": "Disposition", "rationale": "Rationale",
+                "model_name": "Model", "artifact_sha256": "Artifact SHA-256",
+                "predicted_rul_cycles": "Predicted RUL (cycles)",
+                "interval_lower_cycles": "Interval lower (cycles)",
+                "interval_upper_cycles": "Interval upper (cycles)",
+                "threshold_cycles": "Threshold (cycles)",
+                "persistence_cycles": "Persistence (cycles)",
+                "review_horizon_cycles": "Review horizon (cycles)",
+            })
+            st.dataframe(history_view.drop(columns=["id", "engine_id"]),
+                         hide_index=True, width="stretch")
+        else:
+            st.caption("No local review notes for this engine yet.")
 
     with st.expander("Retrospective validation outcome · evaluation only"):
         st.warning("This held-out full trajectory's later outcome is shown only to evaluate the snapshot estimate. It did not affect queue ranking or the displayed predictions.")
