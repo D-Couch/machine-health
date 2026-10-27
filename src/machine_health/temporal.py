@@ -18,7 +18,28 @@ from machine_health.data import sha256
 RAW_FEATURES = ["cycle", "setting_1", "setting_2", "setting_3", *[f"sensor_{i}" for i in range(1, 22)]]
 HISTORY = 30
 SEED = 31415
-DEVICE = torch.device("cpu")
+
+
+def select_device() -> torch.device:
+    """Use CUDA when PyTorch can access it; otherwise keep the portable CPU path."""
+    try:
+        if torch.cuda.is_available():
+            return torch.device("cuda")
+    except (AssertionError, RuntimeError):
+        # A CUDA wheel can be installed while its driver/device is unavailable.
+        pass
+    return torch.device("cpu")
+
+
+DEVICE = select_device()
+
+
+def device_metadata(device: torch.device = DEVICE) -> dict:
+    info = {"device": str(device), "cuda_available": torch.cuda.is_available(),
+            "cuda_runtime": torch.version.cuda, "gpu_name": None}
+    if device.type == "cuda":
+        info["gpu_name"] = torch.cuda.get_device_name(device)
+    return info
 
 
 class CausalBlock(nn.Module):
@@ -106,14 +127,16 @@ def _prediction(model: nn.Module, x: torch.Tensor, target_mean: float,
 
 
 def load_tcn(path: Path) -> tuple[CausalTCN, dict]:
-    bundle = torch.load(path, map_location=DEVICE, weights_only=True)
+    # Keep checkpoint tensors on CPU for portable NumPy preprocessing, then move
+    # only the model to the selected inference device.
+    bundle = torch.load(path, map_location="cpu", weights_only=True)
     if bundle.get("raw_features") != RAW_FEATURES or bundle.get("history_cycles") != HISTORY:
         raise ValueError("TCN checkpoint feature schema or history length does not match this application")
     if bundle["feature_mean"].shape != (len(RAW_FEATURES),) or bundle["feature_scale"].shape != (len(RAW_FEATURES),):
         raise ValueError("TCN checkpoint normalization schema is invalid")
     model = CausalTCN(input_channels=len(bundle["raw_features"]), channels=bundle["channels"])
     model.load_state_dict(bundle["state_dict"])
-    model.eval()
+    model.to(DEVICE).eval()
     return model, bundle
 
 
@@ -123,6 +146,8 @@ def train_tcn(frame: pd.DataFrame, train_engines: list[str],
     from sklearn.model_selection import train_test_split
 
     torch.manual_seed(SEED)
+    if DEVICE.type == "cuda":
+        torch.cuda.manual_seed_all(SEED)
     np.random.seed(SEED)
     torch.set_num_threads(min(8, torch.get_num_threads()))
     fit_ids, early_ids = train_test_split(sorted(train_engines), test_size=0.1, random_state=SEED)
@@ -179,6 +204,7 @@ def train_tcn(frame: pd.DataFrame, train_engines: list[str],
                      "temporal_module_sha256": sha256(Path(__file__)),
                      "python": platform.python_version(), "platform": platform.platform(),
                      "cpu_threads": torch.get_num_threads(),
+                     **device_metadata(),
                      "torch": str(torch.__version__), "created_utc": datetime.now(UTC).isoformat()}}
     output.parent.mkdir(parents=True, exist_ok=True)
     torch.save(bundle, output)

@@ -10,8 +10,16 @@ from machine_health.temporal import (
     add_intervals,
     calibrate_by_predicted_band,
     load_tcn,
+    select_device,
 )
 from machine_health.temporal_pipeline import partition_validation_engines
+
+
+def test_device_selection_uses_cuda_when_available_and_cpu_otherwise(monkeypatch):
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    assert select_device().type == "cuda"
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
+    assert select_device().type == "cpu"
 
 
 def _frame(engines=("train:FD001:1", "train:FD001:2"), cycles=5):

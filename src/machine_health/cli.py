@@ -99,7 +99,8 @@ def main() -> None:
         result = run_temporal_experiment(args.data, args.artifact, args.split,
                                          args.checkpoint, args.output, args.replay)
         score = result["tcn"]["score"]
-        print(f"TCN validation endpoint MAE={score['endpoint']['mae_cycles']:.3f} cycles; "
+        print(f"TCN device={result['device']} ({result['gpu_name'] or 'CPU'}); "
+              f"validation endpoint MAE={score['endpoint']['mae_cycles']:.3f} cycles; "
               f"report={args.output.with_suffix('.md')}")
     elif args.command == "audit-input-support":
         from machine_health.input_monitoring import audit_validation_input_support

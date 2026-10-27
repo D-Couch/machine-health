@@ -1,6 +1,6 @@
 # Machine Health — predictive maintenance benchmark and planning prototype
 
-A reproducible CPU-first predictive-maintenance project with two linked goals: rigorous ML evaluation on NASA's simulated C-MAPSS turbofan histories, and a prototype for a reliability or maintenance planner reviewing a simulated validation fleet. The workflow prioritizes engines from prediction-only snapshots, then lets a reviewer inspect sensor and model evidence. It is designed to focus limited review attention with traceable evidence, but does not measure that benefit. It is not live telemetry, a real-fleet system, or maintenance advice.
+A reproducible predictive-maintenance project with two linked goals: rigorous ML evaluation on NASA's simulated C-MAPSS turbofan histories, and a prototype for a reliability or maintenance planner reviewing a simulated validation fleet. The TCN uses CUDA when PyTorch can access an NVIDIA GPU and otherwise falls back to CPU; the gradient-boosting baseline uses CPU. The workflow prioritizes engines from prediction-only snapshots, then lets a reviewer inspect sensor and model evidence. It is designed to focus limited review attention with traceable evidence, but does not measure that benefit. It is not live telemetry, a real-fleet system, or maintenance advice.
 
 ## Quick demo from a fresh clone
 
@@ -24,10 +24,14 @@ The committed reports make **Project overview**, **Evaluation evidence**, and **
 See [`docs/DEMO.md`](docs/DEMO.md) for the short review path, architecture diagram, and real browser captures. For a full reproduction, including the optional TCN, run:
 
 ```bash
-.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu 'torch>=2.5,<3'
+bash scripts/install_torch.sh
 .venv/bin/machine-health train-temporal
 .venv/bin/streamlit run app/streamlit_app.py
 ```
+
+The installer detects an NVIDIA GPU visible through `nvidia-smi`, installs PyTorch 2.14.1's official CUDA 13.0 wheel in the project environment, and verifies access. When no GPU is visible and no CUDA build is installed, it installs the matching CPU-only PyTorch build. If a CUDA build is already installed but the command cannot see devices (for example, inside a restricted sandbox), it keeps that build and reports the access limitation instead of silently downgrading it. Set `PYTHON=/path/to/python` to target another isolated environment or `PYTORCH_CUDA_INDEX_URL` to choose another official wheel index. The optional TCN selects CUDA only when `torch.cuda.is_available()` succeeds; otherwise it runs on CPU.
+
+Codex may hide host GPU device nodes from ordinary `workspace-write` commands. If a GPU run is expected, run the training command through approved escalated execution instead of treating a sandboxed CPU fallback as a GPU run. The CLI prints its selected device, and each validation report records the device, CUDA runtime, and GPU name.
 
 To use an existing training file instead of acquisition, run `.venv/bin/machine-health prepare --file /path/to/train_FD001.txt`. The parser expects the standard 26 whitespace-separated columns.
 
@@ -96,6 +100,8 @@ The overview and evidence panels use the small committed JSON reports and work w
 `machine-health train-temporal` trains a compact causal TCN from 30-cycle raw sensor histories. It uses 72 original training engines for fitting, 8 disjoint training engines for early stopping, 12 of the existing validation engines for model comparison, and the remaining 8 validation engines for interval calibration. Tree and TCN point metrics use the same 12 model-selection engines. The official test set is not loaded.
 
 The current validation-only comparison is in `reports/temporal_model_v1.md`. On the 12 model-selection engines, TCN window MAE/RMSE is 20.701/28.217 cycles versus 23.653/30.502 for the gradient-boosted baseline. Complete-path endpoint targets are zero by construction, so endpoint metrics there are not operational RUL evidence. Nominal 80% intervals use an engine-block maximum-residual conformal method grouped by *predicted* RUL band; with only 8 calibration engines, intervals are coarse and can be wide. Empirical model-selection endpoint coverage was 12/12 with mean interval width 12.67 cycles. Read [docs/MODEL_CARD.md](docs/MODEL_CARD.md) for the method, results by RUL range, assumptions, and limitations.
+
+A separate real CUDA training run is documented in [`reports/temporal_model_gpu_v1.md`](reports/temporal_model_gpu_v1.md). It trained with PyTorch 2.14.1+cu130 on the RTX 4090 and scored 21.902/28.528 cycles window MAE/RMSE on the same 12 validation engines; its validation endpoint MAE/RMSE was 0.915/1.900 cycles. These are a separate validation run and do not change the frozen official-test report. The saved GPU checkpoint loaded on CUDA and reproduced one engine's 128 replay predictions with maximum absolute difference 6.8e-06 cycles.
 
 The Streamlit dashboard offers the TCN replay and calibrated interval when temporal experiment outputs exist.
 
