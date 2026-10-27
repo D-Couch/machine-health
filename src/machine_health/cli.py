@@ -52,6 +52,13 @@ def main() -> None:
     temporal.add_argument("--checkpoint", type=Path, default=ROOT / "artifacts/fd001_tcn.pt")
     temporal.add_argument("--output", type=Path, default=ROOT / "reports/temporal_model_v1.json")
     temporal.add_argument("--replay", type=Path, default=ROOT / "data/processed/temporal_validation_replay.csv")
+    support = sub.add_parser(
+        "audit-input-support",
+        help="Compare held-out validation inputs with training-only feature quantiles",
+    )
+    support.add_argument("--data", type=Path, default=ROOT / "data/raw/train_FD001.txt")
+    support.add_argument("--split", type=Path, default=ROOT / "reports/fd001_split.json")
+    support.add_argument("--output", type=Path, default=ROOT / "reports/input_support_v1.json")
     args = parser.parse_args()
     if args.command == "prepare":
         path = args.file or prepare(args.data)
@@ -94,6 +101,18 @@ def main() -> None:
         score = result["tcn"]["score"]
         print(f"TCN validation endpoint MAE={score['endpoint']['mae_cycles']:.3f} cycles; "
               f"report={args.output.with_suffix('.md')}")
+    elif args.command == "audit-input-support":
+        from machine_health.input_monitoring import audit_validation_input_support
+
+        result = audit_validation_input_support(args.data, args.split, args.output)
+        for snapshot in result["snapshots"]:
+            fraction = snapshot["out_of_support_fraction"]
+            summary = "n/a" if fraction is None else f"{fraction:.2%}"
+            print(
+                f"Cycle {snapshot['snapshot_cycle']}: {snapshot['validation_engines']} engines; "
+                f"{summary} of feature values outside training bounds"
+            )
+        print(f"Wrote descriptive input-support audit to {args.output.with_suffix('.md')}")
     else:
         result = evaluate_test(args.data, args.artifact, args.output)
         print(f"Official test endpoint MAE={result['primary_model']['mae_cycles']:.3f} cycles; report={args.output.with_suffix('.md')}")

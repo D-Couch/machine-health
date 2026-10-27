@@ -12,6 +12,12 @@ Milestone 5 adds a local-only disposition form for inspect/monitor/defer/dismiss
 
 Milestone 6 adds a true fresh-clone demo path driven by committed reports, a short walkthrough and architecture diagram in `docs/DEMO.md`, a project-aligned Streamlit color theme, and three real browser captures from the local FD001 app. The sidebar now describes the project as a portfolio prototype instead of showing stale milestone progress.
 
+## Broader operational relevance — initial input-support audit
+
+After the planned milestones, an initial exploratory slice of the separately gated operational-relevance work adds `machine-health audit-input-support`. It derives per-feature 1st–99th percentile bounds from training engines only and reports how often held-out validation features fall outside those bounds at fixed observed cycles. It is an offline diagnostic, not a live monitor or alert policy, and it reads no RUL or official-test data. Method and limitations are documented in `docs/INPUT_SUPPORT_AUDIT.md`.
+
+On the real held-out FD001 validation cohort, cycle 120 had 15/2,600 feature values outside the training bounds (0.58%), affecting 5/20 engines; cycle 60 had 14/2,600 (0.54%), affecting 9/20; and cycle 180 had 27/1,430 (1.89%), affecting 4/11 engines with that cycle. These are descriptive feature-support counts from simulated complete trajectories, not operational warning rates or evidence of accuracy loss. The next useful gate is a concrete equipment context and representative authorized telemetry before turning such signals into API warnings or decision workflow behavior.
+
 ## Environment and data
 
 - Executing in `/var/home/dylan/src/machine-health` on Fedora Linux 6.17.12-300.fc43.x86_64, x86_64, Intel Core i9-13900KF (24 cores / 32 logical CPUs), 31 GiB RAM. Python 3.14.8 in the project `.venv`; dependencies are locked in `requirements-lock.txt`.
@@ -84,6 +90,9 @@ The TCN selected epoch 9 (17 epochs ran, limit 60, patience 8). The complete val
 - `.streamlit/config.toml` applies the dashboard's blue/teal palette consistently to Streamlit controls and tabs. `README.md` now separates the quick report-only demo from data acquisition, baseline training, and optional temporal-model reproduction.
 - Milestone 6 did not load official-test raw sensors/labels, rerun its score, or change any metric/report/artifact. Chromium/Playwright were installed only in the ignored local `.venv`/`/tmp` for this visual review; they are not runtime dependencies.
 - Reproducibility follow-up: `.github/workflows/ci.yml` now installs the pinned CPU-only `requirements-lock.txt`, installs the project editable with `--no-deps`, and keys pip caching to the lockfile. Its existing pytest suite includes the FastAPI health/predict/input-validation smoke with a temporary fixture artifact. CI still does not download NASA data or train benchmark models. The hosted GitHub Actions workflow has not been dispatched from this local session.
+- `.venv/bin/ruff check src tests app` — passed after adding the input-support audit.
+- `.venv/bin/pytest -q` — 29 passed; one existing Starlette `TestClient`/`httpx` deprecation warning.
+- `.venv/bin/machine-health audit-input-support` — generated `reports/input_support_v1.json` and `.md` from local NASA training/validation data. Inputs use the fixed engine split and training-only feature quantiles; report provenance includes dataset/split and source hashes. Official-test files/labels and RUL labels were not used.
 
 ## Launch and next steps
 

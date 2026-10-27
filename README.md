@@ -66,6 +66,10 @@ Queue status and ordering use only model predictions through the selected snapsh
 
 This demonstrates a maintenance-planning interaction on benchmark data. It does not establish economic benefit, real-fleet performance, or suitability for aircraft or other operational maintenance decisions.
 
+## Input support audit
+
+`.venv/bin/machine-health audit-input-support` compares validation feature values at fixed cycles with per-feature 1st–99th percentile bands fit on training engines only. The report is an exploratory input-support diagnostic: it does not score labels, change predictions, measure accuracy drift, or define production alerts. See [`docs/INPUT_SUPPORT_AUDIT.md`](docs/INPUT_SUPPORT_AUDIT.md) and the recorded [`reports/input_support_v1.md`](reports/input_support_v1.md) for the method, real validation observations, and limits.
+
 ## API, experiment index, and container
 
 FastAPI uses the dashboard's saved artifact and shared causal feature builder. It validates strict cycle order and rejects extra fields such as RUL labels or engine IDs. See [docs/API.md](docs/API.md). Launch with `.venv/bin/uvicorn machine_health.api:app --host 127.0.0.1 --port 8000`.
