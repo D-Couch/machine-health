@@ -54,6 +54,17 @@ Training and evaluation calls append provenance/config/metric rows to the local 
 
 For a container demo, first prepare data and train locally, then run `podman compose up --build`. The Compose file bind-mounts the local dataset, model artifact, and reports read-only. GitHub Actions runs CPU tests and lint only; it does not acquire NASA data or train a model.
 
+## Visual walkthrough
+
+Launch `.venv/bin/streamlit run app/streamlit_app.py` for a four-part project tour:
+
+- **Project overview:** an engine-level partition diagram, project summary, and frozen test result.
+- **Engine replay:** scrub a validation engine by cycle, inspect sensor traces, predictions, and (for the TCN) its interval band. Validation truth is labeled as retrospective evaluation data.
+- **Evaluation evidence:** per-engine official endpoint errors, RUL-band breakdowns, matched validation model comparison, interval coverage/width, and alert tradeoffs.
+- **Methods & limitations:** data flow, model inputs, split design, interval method, and benchmark caveats.
+
+The overview and evidence panels use the small committed JSON reports and work without the ignored NASA data or model artifacts. The replay panel needs the local FD001 training file and corresponding trained artifacts. Every chart identifies its split and aggregation to keep unlike validation scores separate from frozen test scores.
+
 ## Temporal model and intervals
 
 `machine-health train-temporal` trains a compact causal TCN from 30-cycle raw sensor histories. It uses 72 original training engines for fitting, 8 disjoint training engines for early stopping, 12 of the existing validation engines for model comparison, and the remaining 8 validation engines for interval calibration. Tree and TCN point metrics use the same 12 model-selection engines. The official test set is not loaded.

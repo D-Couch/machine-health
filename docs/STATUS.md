@@ -1,10 +1,10 @@
-# Machine Health status — 2026-10-19
+# Machine Health status — 2026-10-27
 
 ## Milestones 1–3
 
 Implemented a CPU-first NASA C-MAPSS FD001 pipeline with engine-held-out validation, causal rolling features, persisted sklearn artifact, Streamlit replay, strict FastAPI inference, validation-only alert threshold selection, local run provenance index, and a frozen one-time official test report. See README for the workflow and `docs/EVALUATION_PROTOCOL.md` for the test boundary.
 
-Milestone 3 adds a compact causal PyTorch TCN, early stopping on training-group engines, a separate engine-level model-selection/calibration split within validation, nominal 80% engine-block conformal intervals, a model comparison report, model card, and dashboard replay with interval band. The official test partition was not loaded during Milestone 3.
+Milestone 3 adds a compact causal PyTorch TCN, early stopping on training-group engines, a separate engine-level model-selection/calibration split within validation, nominal 80% engine-block conformal intervals, a model comparison report, and a model card. The dashboard is now a four-part visual walkthrough (overview, replay, evaluation, methods); overview and report-driven evidence render without local raw data or model artifacts. The official test partition was not loaded during Milestone 3.
 
 ## Environment and data
 
@@ -12,7 +12,7 @@ Milestone 3 adds a compact causal PyTorch TCN, early stopping on training-group 
 - NVIDIA GPU is not available to this process (`nvidia-smi` could not communicate with a driver); training and inference are CPU.
 - Official NASA archive and FD001 train/test inputs are local and ignored by Git. Train has 20,631 rows and 100 engines. The official test has 100 truncated trajectories with paired endpoint labels. Data hashes and retrieval provenance are local under `data/raw/provenance.json`.
 - NASA PCoE repository asks for dataset and donor acknowledgment. No distinct redistribution license was identified; raw data stays local.
-- Git is a normal checkout on `main`, tracking `origin/main`. The frozen protocol preceded test scoring. Milestone 3 is committed locally as `0b7db4d`; it has not been pushed.
+- Git is a normal checkout on `main`, tracking `origin/main`. The frozen protocol preceded test scoring. Latest project commit before this dashboard update is `4904eaa` and is pushed to `origin/main`.
 
 ## Real results
 
@@ -42,7 +42,7 @@ The TCN selected epoch 9 (17 epochs ran, limit 60, patience 8). The complete val
 
 ## Implemented interfaces
 
-- Streamlit: replay complete validation engines and show validation/test summaries.
+- Streamlit: four-tab portfolio walkthrough with a branded summary, engine-partition Sankey, architecture diagram, endpoint prediction/error visualizations, validation comparisons, interval coverage/width, alert tradeoff, and cycle-level sensor replay. Report-driven overview/evidence still work on a fresh clone without local data/artifacts; replay explains its local prerequisites.
 - FastAPI: strict `POST /v1/predict` schema; requires 20–1,000 ordered observations and rejects label/engine metadata. Uses the shared causal feature builder and serialized model.
 - SQLite experiment index: `data/experiments.sqlite`, ignored by Git; `machine-health list-runs` inspects recorded evaluations.
 - TCN checkpoint: `artifacts/fd001_tcn.pt`, local-only and ignored by Git. Replay predictions are in ignored `data/processed/temporal_validation_replay.csv`.
@@ -56,11 +56,11 @@ The TCN selected epoch 9 (17 epochs ran, limit 60, patience 8). The complete val
 - `.venv/bin/machine-health train-temporal` — completed on real NASA training/validation engines, early-stopping at epoch 9. Saved the TCN checkpoint, disjoint split manifest, validation JSON/Markdown report, and replay CSV. The official test partition was not opened.
 - The TCN report records code revision, dirty state, source hashes, Python/platform, package versions, CPU threads, data hash, parent split hash, and checkpoint SHA-256. Checkpoint reload reproduced 192 predictions for a held-out engine within 7.4e-06 cycles of the saved replay.
 - Synthetic TCN tests cover deterministic engine partitioning, causal sequence construction, engine reset/padding, model output, calibration finite-sample bound, and interval band assignment. Synthetic test values are not reported as NASA results.
-- Streamlit `AppTest` rendered both baseline and TCN modes, with 12 model-selection engine choices and both replay charts; HTTP app and health routes returned 200 in headless smoke.
+- Streamlit `AppTest` rendered all four sections, nine Plotly visualizations, the architecture diagram, and TCN replay mode (12 eligible engines). A temporary no-data project copy rendered overview/evidence and correctly gated replay.
 - `podman build -t machine-health:milestone3 .` — passed. Temporary local dashboard container returned HTTP 200 at `/` and `/_stcore/health`; container was stopped.
 - Real artifact API smoke via FastAPI TestClient — `/health` returned `ok`; `/v1/predict` returned a finite nonnegative prediction for 25 real training observations. TestClient lifecycle was entered so artifact loading ran.
 - `.venv/bin/machine-health evaluate-validation` — completed and reproduced the recorded validation endpoint result; `list-runs` shows validation, alert policy, and official test evaluation entries with artifact/data/report hashes.
-- Official test evaluation was not rerun. Container build passed; container runtime smoke not verified due to the Podman sandbox limitation above.
+- Official test evaluation was not rerun. The `localhost/machine-health:milestone3` image build and temporary runtime HTTP smoke both passed; data/model volumes are local-only.
 
 ## Launch and next steps
 
@@ -74,4 +74,4 @@ podman compose up --build
 
 Recreate the local environment with `python3 -m venv .venv && .venv/bin/pip install -r requirements-lock.txt && .venv/bin/pip install -e '.[dev]'`. Acquire and prepare data, then train with the README commands. The official test result is a frozen benchmark and must not be fed back into model or alert tuning. Further work can focus on a larger engine-level calibration set, uncertainty robustness, and broader subsets under a new validation design.
 
-The dashboard shows a TCN option and calibrated interval when `train-temporal` outputs are present. A remaining limitation is that the current run uses only 8 calibration engines; intervals are coarse and can be wide. Model-selection uses 12 engines, so score uncertainty is substantial. No TCN official-test metric is claimed or available.
+The dashboard shows a TCN option and calibrated interval when `train-temporal` outputs are present. A remaining limitation is that the current run uses only 8 calibration engines; intervals are coarse and can be wide. Model-selection uses 12 engines, so score uncertainty is substantial. No TCN official-test metric is claimed or available. Portfolio dashboard changes are committed locally as `e8d934d`; this update has not been pushed.
