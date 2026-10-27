@@ -759,7 +759,7 @@ test_report = read_report("official_test_v1.json")
 render_header(test_report)
 st.sidebar.markdown("### MACHINE HEALTH")
 st.sidebar.caption("NASA C-MAPSS · FD001")
-st.sidebar.markdown("**Project status**  \nMilestone 4 in progress · CPU-first")
+st.sidebar.markdown("**Project status**  \nPortfolio prototype · CPU-first")
 st.sidebar.caption("All RUL estimates are measured in cycles.")
 fleet_tab, overview_tab, replay_tab, evidence_tab, methods_tab = st.tabs(
     ["Fleet review", "Project overview", "Engine replay", "Evaluation evidence", "Methods & limitations"])

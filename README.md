@@ -2,22 +2,34 @@
 
 A reproducible CPU-first predictive-maintenance project with two linked goals: rigorous ML evaluation on NASA's simulated C-MAPSS turbofan histories, and a prototype for a reliability or maintenance planner reviewing a simulated validation fleet. The workflow prioritizes engines from prediction-only snapshots, then lets a reviewer inspect sensor and model evidence. It is designed to focus limited review attention with traceable evidence, but does not measure that benefit. It is not live telemetry, a real-fleet system, or maintenance advice.
 
-## Quick start
+## Quick demo from a fresh clone
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install -e '.[dev]'
-.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu 'torch>=2.5,<3'
+.venv/bin/pip install -r requirements-lock.txt
+.venv/bin/pip install -e .
+.venv/bin/streamlit run app/streamlit_app.py
+```
+
+The committed reports make **Project overview**, **Evaluation evidence**, and **Methods & limitations** available immediately without NASA data or model artifacts. Fleet review and engine replay explain their local data/artifact requirements in the app. To enable them, acquire the local FD001 files and build the baseline artifact:
+
+```bash
 .venv/bin/machine-health prepare
 .venv/bin/machine-health train
 .venv/bin/machine-health evaluate-validation
 .venv/bin/machine-health select-alert-policy
-.venv/bin/machine-health train-temporal
 .venv/bin/machine-health replay
+```
+
+See [`docs/DEMO.md`](docs/DEMO.md) for the short review path, architecture diagram, and real browser captures. For a full reproduction, including the optional TCN, run:
+
+```bash
+.venv/bin/pip install --index-url https://download.pytorch.org/whl/cpu 'torch>=2.5,<3'
+.venv/bin/machine-health train-temporal
 .venv/bin/streamlit run app/streamlit_app.py
 ```
 
-To use an existing file, run `machine-health prepare --file /path/to/train_FD001.txt`. Parser expects the standard 26 whitespace-separated columns.
+To use an existing training file instead of acquisition, run `.venv/bin/machine-health prepare --file /path/to/train_FD001.txt`. The parser expects the standard 26 whitespace-separated columns.
 
 ## Data and protocol
 
