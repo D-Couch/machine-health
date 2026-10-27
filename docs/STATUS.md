@@ -83,6 +83,7 @@ The TCN selected epoch 9 (17 epochs ran, limit 60, patience 8). The complete val
 - Headless Chromium browser inspection against the actual local FD001 app — HTTP 200, no page errors, selected Fleet/Overview/Evaluation tabs captured in `docs/images/`, and no horizontal overflow at 1440px or 390px viewport widths. Screenshots use actual committed reports and local trained artifacts, not fixtures.
 - `.streamlit/config.toml` applies the dashboard's blue/teal palette consistently to Streamlit controls and tabs. `README.md` now separates the quick report-only demo from data acquisition, baseline training, and optional temporal-model reproduction.
 - Milestone 6 did not load official-test raw sensors/labels, rerun its score, or change any metric/report/artifact. Chromium/Playwright were installed only in the ignored local `.venv`/`/tmp` for this visual review; they are not runtime dependencies.
+- Reproducibility follow-up: `.github/workflows/ci.yml` now installs the pinned CPU-only `requirements-lock.txt`, installs the project editable with `--no-deps`, and keys pip caching to the lockfile. Its existing pytest suite includes the FastAPI health/predict/input-validation smoke with a temporary fixture artifact. CI still does not download NASA data or train benchmark models. The hosted GitHub Actions workflow has not been dispatched from this local session.
 
 ## Launch and next steps
 

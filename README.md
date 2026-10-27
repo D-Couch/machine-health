@@ -72,7 +72,7 @@ FastAPI uses the dashboard's saved artifact and shared causal feature builder. I
 
 Training and evaluation calls append provenance/config/metric rows to the local SQLite index at `data/experiments.sqlite`; inspect it with `.venv/bin/machine-health list-runs`. The database is local-only and ignored by Git.
 
-For a container demo, first prepare data and train locally, then run `podman compose up --build`. The Compose file bind-mounts the local dataset, model artifact, and reports read-only. GitHub Actions runs CPU tests and lint only; it does not acquire NASA data or train a model.
+For a container demo, first prepare data and train locally, then run `podman compose up --build`. The Compose file bind-mounts the local dataset, model artifact, and reports read-only. GitHub Actions installs the CPU-only `requirements-lock.txt`, runs tests (including a fixture-artifact API request), and lints the project; it does not acquire NASA data or train a benchmark model.
 
 ## Visual walkthrough
 
